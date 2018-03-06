@@ -11,11 +11,11 @@ int main() {
     // loop input n numbers
     for (i = 1; i <= n; i++) {
         scanf("%d", &t);
-        a[t] = 1;
+        a[t] = 1; // mark show up ISBN
     }
 
     for (i = 1; i <= 1000; i++) {
-        if (a[i] == 1) {
+        if (a[i] == 1) { // print show up ISBN
             printf("%d ", i);
         }
     }
