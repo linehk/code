@@ -1,3 +1,4 @@
+// cat map1 | ./a.out
 #include <stdio.h>
 
 char a[20][21];

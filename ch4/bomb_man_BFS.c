@@ -1,3 +1,4 @@
+// cat map1 | ./a.out
 #include <stdio.h>
 
 struct note {
@@ -61,7 +62,6 @@ int main() {
     scanf("%d %d %d %d", &n, &m, &startx, &starty);
     // n = 13; m = 13; startx = 3; starty = 3;
 
-    // cat map | ./a.out
     for (i = 0; i <= n-1; i++) {
         scanf("%s", a[i]);
     }
