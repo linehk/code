@@ -1,8 +1,9 @@
 // cat map1 | ./a.out
+// BUG segmentation fault
 #include <stdio.h>
 
 int dis[7], book[7] = {0};
-int h[7], pos[7], size;
+int h[7], pos[7], size = 0;
 
 void swap(int x, int y) {
     int t;
@@ -70,7 +71,7 @@ int main() {
     int n, m, i, j, k;
 
     int u[19], v[19], w[19], first[7], next[19];
-    int inf = 999999999;
+    int inf = 99999999;
     int count = 0, sum = 0;
 
     scanf("%d %d", &n, &m);

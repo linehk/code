@@ -66,19 +66,22 @@ int main() {
             }
         }
 
-        t = q2.data[q2.head];
-        if (book[t] == 0) {
-            q2.head++;
+        t = q2.data[q2.head]; // xiao ha put a card
+        // judge xiao ha this card whether win cards
+        if (book[t] == 0) { // tables not t card, so this turn can't win cards
+            q2.head++; // put this t card out of queue
             s.top++;
-            s.data[s.top] = t;
-            book[t] = 1;
+            s.data[s.top] = t; // in stack
+            book[t] = 1; // mark tables already have t card
         } else {
-            q2.head++;
-            q2.data[q2.tail] = t;
+            // this turn xiao ha can win cards
+            q2.head++; // put this card out of queue
+            q2.data[q2.tail] = t; // add to hand card tail
             q2.tail++;
+            // put card in tables which can win to hand card to tail
             while (s.data[s.top] != t) {
-                book[s.data[s.top]] = 0;
-                q2.data[q2.tail] = s.data[s.top];
+                book[s.data[s.top]] = 0; // cancel mark
+                q2.data[q2.tail] = s.data[s.top]; // order add to tail
                 q2.tail++;
                 s.top--;
             }
@@ -105,7 +108,7 @@ int main() {
         for (i = q2.head; i <= q2.tail-1; i++) {
             printf(" %d", q2.data[i]);
         }
-        if (s.top > 0) {
+        if (s.top > 0) { // order print cards in tables
             printf("\ndesk cards are :");
             for (i = 1; i <= s.top; i++) {
                 printf(" %d", s.data[i]);
