@@ -1,3 +1,4 @@
+// cat map1 | ./a.out
 #include <stdio.h>
 
 int dis[7], book[7] = {0};
