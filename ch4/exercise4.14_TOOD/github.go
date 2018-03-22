@@ -1,18 +1,35 @@
+// Package github provides a GO API for the GitHub issue tracker.
+// See https://developer.github.com/v3/search/#search-issues.
+
 package main
+
+import (
+	"time"
+)
 
 const IssuesURL = "https://api.github.com/search/issues"
 
-type Issues struct {
-	TotalCount int     `json:"total_count"`
-	Items      []*Info `json:"itmes"`
+type IssuesSearchResult struct {
+	TotalCount int `json:"total_count"`
+	Items      []*Issue
 }
 
-type Info struct {
-	Milestone *MilestoneInfo `json:"milestone"`
+type Issue struct {
+	Number    int
+	HTMLURL   string `json:"html_url"`
+	Title     string
+	State     string
+	User      *User
+	CreatedAt time.Time   `json:"created_at"`
+	Body      string      // in Markdown format
+	Milestone *Milestones `json:"milestone"`
 }
 
-type MilestoneInfo struct {
-	HTMLURL      string `json:"html_url"`
-	OpenIssues   int    `json:"open_issues"`
-	ClosedIssues int    `json:"closed_issues"`
+type User struct {
+	Login   string
+	HTMLURL string `json:"html_url"`
+}
+
+type Milestones struct {
+	Id int `json:"id"`
 }

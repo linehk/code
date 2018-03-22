@@ -67,7 +67,7 @@ func lissajous(out io.Writer, myCycles float64) {
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
-	if err := r.ParseForm; err != nil {
+	if err := r.ParseForm(); err != nil {
 		log.Print(err)
 	}
 	if r.Form["cycles"] != nil {

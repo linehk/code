@@ -1,52 +1,34 @@
+// Issues prints a table of GitHub issues matching the search terms.
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/", Handle)
+	http.HandleFunc("/", Handler)
 	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
-func Handle(w http.ResponseWriter, r *http.Request) {
-	if err := r.ParseForm; err != nil {
+func Handler(w http.ResponseWriter, r *http.Request) {
+	if err := r.ParseForm(); err != nil {
 		log.Print(err)
 	}
-	if r.Form["issues"] != nil {
-		s := r.Form["issues"][0]
-		result, err := GetInfo(s)
+	if r.Form["i"] != nil {
+		result, err := SearchIssues(r.Form["i"])
 		if err != nil {
 			log.Print(err)
 		}
-		fmt.Fprintf(w, "count = %d", result.TotalCount)
-		for _, item := range result.Items {
-			fmt.Fprintf(w, "MilestoneURL = %s, OpenIssues = %d, ClosedIssues = %d",
-				item.Milestone.HTMLURL, item.Milestone.OpenIssues,
-				item.Milestone.ClosedIssues)
+		for _, v := range result.Items {
+			fmt.Fprintf(w, "%s\n", v.Milestone.Id)
 		}
 	}
-}
-
-func GetInfo(q string) (*Issues, error) {
-	resp, err := http.Get(IssuesURL + "?q=" + q)
-	if err != nil {
-		return nil, err
-	}
-
-	if resp.StatusCode != http.StatusOK {
-		resp.Body.Close()
-		return nil, fmt.Errorf("search query failed: %s", resp.Status)
-	}
-
-	var result Issues
-	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
-		resp.Body.Close()
-		return nil, err
-	}
-	resp.Body.Close()
-	return &result, nil
+	/*
+		for _, item := range result.Items {
+			fmt.Printf("#%-5d %9.9s %.55s\n",
+				item.Number, item.User.Login, item.Title)
+		}
+	*/
 }
