@@ -7,45 +7,35 @@ import (
 	"golang.org/x/net/html"
 )
 
+var s []string
+var count = make(map[string]int)
+
 func main() {
 	doc, err := html.Parse(os.Stdin)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "outline: %v\n", err)
 	}
-	s := outline(nil, doc)
-	fmt.Println(s)
+	outline(nil, doc)
 	countSameElement(s)
+	for k, v := range count {
+		fmt.Printf("%s = %d\n", k, v)
+	}
 }
 
-func outline(stack []string, n *html.Node) []string {
-	if n.Type == html.DocumentNode {
+func outline(stack []string, n *html.Node) {
+	if n.Type == html.ElementNode {
 		stack = append(stack, n.Data)
+		for _, k := range stack {
+			s = append(s, k)
+		}
 	}
-	for c := n.FirstChild; c != nil; c = n.NextSibling {
+	for c := n.FirstChild; c != nil; c = c.NextSibling {
 		outline(stack, c)
 	}
-	return stack
 }
 
 func countSameElement(element []string) {
-	one, two, three, four := 0, 0, 0, 0
-	for i := 0; i < len(element)-1; i++ {
-		if element[1] == element[i] {
-			one++
-			fmt.Println("%s = %d", element[1], one)
-		}
-		if element[2] == element[i] {
-			two++
-			fmt.Println("%s = %d", element[2], two)
-		}
-		if element[3] == element[i] {
-			three++
-			fmt.Println("%s = %d", element[3], three)
-		}
-		if element[4] == element[i] {
-			four++
-			fmt.Println("%s = %d", element[4], four)
-		}
-
+	for _, v := range element {
+		count[v]++
 	}
 }
