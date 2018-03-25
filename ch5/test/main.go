@@ -1,26 +1,14 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"io"
-	"os"
+	"strings"
 )
 
 func main() {
-	fmt.Println(readfile())
+	fmt.Println(strings.Map(add1, "HAL-9000"))
+	fmt.Println(strings.Map(add1, "VMS"))
+	fmt.Println(strings.Map(add1, "Admix"))
 }
 
-func readfile() error {
-	in := bufio.NewReader(os.Stdin)
-	for {
-		_, _, err := in.ReadRune()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			return fmt.Errorf("read failed: %v", err)
-		}
-	}
-	return nil
-}
+func add1(r rune) rune { return r + 1 }
