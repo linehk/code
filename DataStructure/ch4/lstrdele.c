@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "linkstr.h"
 
 // 链式串的删除

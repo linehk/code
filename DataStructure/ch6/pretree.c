@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "chtree1.h"
 
 // 实现树的前序遍历
