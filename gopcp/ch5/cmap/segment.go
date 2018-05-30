@@ -37,8 +37,8 @@ type segment struct {
 	lock              sync.Mutex
 }
 
-// NewSegment 会创建一个 Segment 类型的实例。
-func NewSegment(bucketNumber int,
+// newSegment 会创建一个 Segment 类型的实例。
+func newSegment(bucketNumber int,
 	pairRedistributor PairRedistributor) Segment {
 	if bucketNumber <= 0 {
 		bucketNumber = DEFAULT_BUCKET_NUMBER
@@ -64,7 +64,7 @@ func (s *segment) Put(p Pair) (bool, error) {
 	b := s.buckets[int(p.Hash()%uint64(s.bucketsLen))]
 	ok, err := b.Put(p, nil)
 	if ok {
-		newTotal := atomic.AddUint64(&s.pairTotal)
+		newTotal := atomic.AddUint64(&s.pairTotal, 1)
 		s.redistribute(newTotal, b.Size())
 	}
 	s.lock.Unlock()
