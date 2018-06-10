@@ -8,10 +8,10 @@ import javax.swing.*;
 public class ImageViewer {
   public static void main(String[] args) {
     EventQueue.invokeLater(() -> {
-      JFrame frame = new ImageViewerFrame();
-      frame.setTitle("ImageViewer");
-      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      frame.setVisible(true);
+        JFrame frame = new ImageViewerFrame();
+        frame.setTitle("ImageViewer");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
     });
   }
 }
@@ -46,14 +46,14 @@ class ImageViewerFrame extends JFrame {
     JMenuItem openItem = new JMenuItem("Open");
     menu.add(openItem);
     openItem.addActionListener(event -> {
-      // show file chooser dialog
-      int result = chooser.showOpenDialog(null);
+        // show file chooser dialog
+        int result = chooser.showOpenDialog(null);
 
-      // if file selected, set it as icon of the label
-      if (result == JFileChooser.APPROVE_OPTION) {
-        String name = chooser.getSelectedFile().getPath();
-        label.setIcon(new ImageIcon(name));
-      }
+        // if file selected, set it as icon of the label
+        if (result == JFileChooser.APPROVE_OPTION) {
+          String name = chooser.getSelectedFile().getPath();
+          label.setIcon(new ImageIcon(name));
+        }
     });
 
     JMenuItem exitItem = new JMenuItem("Exit");

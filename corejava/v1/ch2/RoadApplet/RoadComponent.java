@@ -96,7 +96,7 @@ class Road {
       i = inext;
     }
     if (Math.random() <= prob_create && speed[0] == -1) {
-      speed[0] = (int)(5.99 * Math.random());
+      speed[0] = (int) (5.99 * Math.random());
       colors[0] = ++count % 10 == 0 ? Color.red : Color.black;
     }
   }
