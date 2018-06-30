@@ -108,7 +108,9 @@ public class CalculatorFrame extends JFrame {
           panel.append("\n");
         }
       }
-    } catch (UnavailableServiceException | IOException e) {
+    } catch (UnavailableServiceException e) {
+      JOptionPane.showMessageDialog(this, e);
+    } catch (IOException e) {
       JOptionPane.showMessageDialog(this, e);
     }
   }
@@ -125,7 +127,9 @@ public class CalculatorFrame extends JFrame {
       FileSaveService service =
           (FileSaveService) ServiceManager.lookup("javax.jnlp.FileSaveService");
       service.saveFileDialog(".", new String[] {"txt"}, data, "calc.txt");
-    } catch (UnavailableServiceException | IOException e) {
+    } catch (UnavailableServiceException e) {
+      JOptionPane.showMessageDialog(this, e);
+    } catch (IOException e) {
       JOptionPane.showMessageDialog(this, e);
     }
   }

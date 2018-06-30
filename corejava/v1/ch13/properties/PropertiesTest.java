@@ -13,7 +13,10 @@ import javax.swing.*;
  */
 public class PropertiesTest {
   public static main(String[] args) {
-
+    EventQueue.invokeLater(() -> {
+        PropertiesFrame frame = new PropertiesFrame();
+        frame.setVisible(true);
+    });
   }
 }
 
