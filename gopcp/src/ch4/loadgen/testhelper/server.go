@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"sync/atomic"
 
-	"github.com/linehk/gopcp/helper/log"
+	"helper/log"
 )
 
 // 日志记录器。
