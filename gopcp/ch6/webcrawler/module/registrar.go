@@ -116,7 +116,7 @@ func (registrar *myRegistrar) GetAllByType(moduleType Type) (map[MID]Module,
 		return nil, errors.NewIllegalParameterError(errMsg)
 	}
 	registrar.rwlock.RLock()
-	defer registrar.rwlock.Unlock()
+	defer registrar.rwlock.RUnlock()
 	modules := registrar.moduleTypeMap[moduleType]
 	if len(modules) == 0 {
 		return nil, ErrNotFoundModuleInstance
@@ -131,7 +131,7 @@ func (registrar *myRegistrar) GetAllByType(moduleType Type) (map[MID]Module,
 // GetAll 用于获取所有组件实例。
 func (registrar *myRegistrar) GetAll() map[MID]Module {
 	result := map[MID]Module{}
-	registrar.rwlock.Lock()
+	registrar.rwlock.RLock()
 	defer registrar.rwlock.RUnlock()
 	for _, modules := range registrar.moduleTypeMap {
 		for mid, module := range modules {

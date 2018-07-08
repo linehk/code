@@ -12,7 +12,7 @@ func TestGenerator(t *testing.T) {
 	max := uint64(0)
 	snGen := NewSNGenertor(start, max)
 	if snGen == nil {
-		t.Fatalf("Couldn't create SN generator! (start: %s, max: %d)",
+		t.Fatalf("Couldn't create SN generator! (start: %d, max: %d)",
 			start, max)
 	}
 	if snGen.Start() != start {
@@ -56,7 +56,7 @@ func TestGenerator(t *testing.T) {
 			t.Fatalf("Inconsistent next ID: expected: %d, actual: %d "+
 				"(sn: %d, index: %d)", expectedNext, snGen.Next(), sn, i)
 		}
-		if sn == snGen.Next() {
+		if sn == snGen.Max() {
 			expectedCycleCount++
 		}
 		if snGen.CycleCount() != expectedCycleCount {

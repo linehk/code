@@ -47,7 +47,7 @@ func TestAddrNew(t *testing.T) {
 			network)
 	}
 	network = "http"
-	ip = "127.0.0.1"
+	ip = "127.0.0.0.1"
 	_, err = NewAddr(network, ip, port)
 	if err == nil {
 		t.Fatalf("No error when create a buffer with illegal network %q!",
