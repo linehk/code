@@ -88,7 +88,7 @@ func genFormula(operands []int, operator string, result int,
 	} else {
 		buff.WriteString(" != ")
 	}
-	buf.WriteString(strconv.Itoa(result))
+	buff.WriteString(strconv.Itoa(result))
 	return buff.String()
 }
 
