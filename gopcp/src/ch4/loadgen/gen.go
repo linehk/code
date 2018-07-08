@@ -179,7 +179,7 @@ func (gen *myGenerator) sendResult(result *lib.CallResult) bool {
 // printIgnoredResult 打印被忽略的结果。
 func (gen *myGenerator) printIgnoredResult(result *lib.CallResult,
 	cause string) {
-	resultMsg := fmt.Sprintf("ID=%d, Code=%d, Msg=%d, Elapse=%v",
+	resultMsg := fmt.Sprintf("ID=%d, Code=%d, Msg=%s, Elapse=%v",
 		result.ID, result.Code, result.Msg, result.Elapse)
 	logger.Warnf("Ignored result: %s. (cause: %s)\n", resultMsg, cause)
 }

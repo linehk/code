@@ -15,7 +15,7 @@ func TestStart(t *testing.T) {
 	// 初始化服务器。
 	server := helper.NewTCPServer()
 	defer server.Close()
-	serverAddr := "127.0.0.1/8080"
+	serverAddr := "127.0.0.1:8080"
 	t.Logf("Startup TCP server(%s)...\n", serverAddr)
 	err := server.Listen(serverAddr)
 	if err != nil {
