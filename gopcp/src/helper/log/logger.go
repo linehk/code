@@ -6,8 +6,8 @@ import (
 	"os"
 	"sync"
 
-	"github.com/linehk/gopcp/helper/log/base"
-	"github.com/linehk/gopcp/helper/log/logrus"
+	"helper/log/base"
+	"helper/log/logrus"
 )
 
 // LoggerCreator 代表日志记录器的创建器。

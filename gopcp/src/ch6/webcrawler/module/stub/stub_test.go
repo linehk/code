@@ -3,7 +3,7 @@ package stub
 import (
 	"testing"
 
-	"github.com/linehk/gopcp/ch6/webcrawler/module"
+	"ch6/webcrawler/module"
 )
 
 // addrStr 代表测试用的网络地址

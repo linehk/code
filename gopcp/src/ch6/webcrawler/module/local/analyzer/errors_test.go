@@ -3,7 +3,7 @@ package analyzer
 import (
 	"testing"
 
-	"github.com/linehk/gopcp/ch6/webcrawler/errors"
+	"ch6/webcrawler/errors"
 )
 
 func TestErrorGenError(t *testing.T) {

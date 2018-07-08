@@ -1,7 +1,7 @@
 package analyzer
 
 import (
-	"github.com/linehk/gopcp/ch6/webcrawler/errors"
+	"ch6/webcrawler/errors"
 )
 
 // genError 用于生成爬虫错误值。

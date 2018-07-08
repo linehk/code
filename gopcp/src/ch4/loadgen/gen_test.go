@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	loadgenlib "github.com/linehk/gopcp/ch4/loadgen/lib"
-	helper "github.com/linehk/gopcp/ch4/loadgen/testhelper"
+	loadgenlib "ch4/loadgen/lib"
+	helper "ch4/loadgen/testhelper"
 )
 
 // printDetail 代表是否打印详细结果。

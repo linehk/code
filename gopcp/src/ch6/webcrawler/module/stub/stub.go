@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"sync/atomic"
 
-	"github.com/linehk/gopcp/ch6/webcrawler/errors"
-	"github.com/linehk/gopcp/ch6/webcrawler/module"
-	"github.com/linehk/gopcp/helper/log"
+	"ch6/webcrawler/errors"
+	"ch6/webcrawler/module"
+	"helper/log"
 )
 
 // logger 代表日志处理器。

@@ -9,8 +9,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/linehk/gopcp/ch4/loadgen/lib"
-	"github.com/linehk/gopcp/helper/log"
+	"ch4/loadgen/lib"
+	"helper/log"
 )
 
 // 日志记录器。

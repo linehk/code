@@ -5,7 +5,7 @@ import (
 	"net"
 	"strconv"
 
-	"github.com/linehk/gopcp/ch6/webcrawler/errors"
+	"ch6/webcrawler/errors"
 )
 
 // mAddr 代表组件网络地址的类型。

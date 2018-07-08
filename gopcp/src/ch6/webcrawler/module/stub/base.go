@@ -1,7 +1,7 @@
 package stub
 
 import (
-	"github.com/linehk/gopcp/ch6/webcrawler/module"
+	"ch6/webcrawler/module"
 )
 
 // ModuleInternal 代表组件的内部基础接口类型。

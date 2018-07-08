@@ -7,7 +7,7 @@ import (
 	"os"
 	"runtime/debug"
 
-	"github.com/linehk/gopcp/ch2/talk/v2/chatbot"
+	"ch2/talk/v2/chatbot"
 )
 
 // chatbotName 决定了对话使用的聊天机器人。

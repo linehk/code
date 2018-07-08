@@ -4,8 +4,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/linehk/gopcp/helper/log/base"
-	"github.com/linehk/gopcp/helper/log/field"
+	"helper/log/base"
+	"helper/log/field"
 )
 
 func TestLogrusLogger(t *testing.T) {

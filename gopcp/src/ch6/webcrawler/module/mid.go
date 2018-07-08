@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/linehk/gopcp/ch6/webcrawler/errors"
+	"ch6/webcrawler/errors"
 )
 
 // DefaultSNGen 代表默认的组件序列号生成器。

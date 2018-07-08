@@ -1,9 +1,9 @@
 package analyzer
 
 import (
-	"github.com/linehk/gopcp/ch6/webcrawler/module"
-	"github.com/linehk/gopcp/ch6/webcrawler/module/stub"
-	"github.com/linehk/gopcp/helper/log"
+	"ch6/webcrawler/module"
+	"ch6/webcrawler/module/stub"
+	"helper/log"
 )
 
 // logger 代表日志记录器。

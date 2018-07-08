@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/linehk/gopcp/helper/log/base"
+	"helper/log/base"
 )
 
 func TestLogger(t *testing.T) {

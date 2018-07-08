@@ -4,8 +4,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/linehk/gopcp/helper/log/base"
-	"github.com/linehk/gopcp/helper/log/field"
+	"helper/log/base"
+	"helper/log/field"
 
 	"github.com/Sirupsen/logrus"
 )
