@@ -22,7 +22,7 @@ type SummaryStruct struct {
 	Called    uint64      `json:"called"`
 	Accepted  uint64      `json:"accepted"`
 	Completed uint64      `json:"completed"`
-	Handing   uint64      `json:"handling"`
+	Handling  uint64      `json:"handling"`
 	Extra     interface{} `json:"extra,omitempty`
 }
 

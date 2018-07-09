@@ -204,7 +204,7 @@ func TestSummary(t *testing.T) {
 			Called:    counts.CalledCount,
 			Accepted:  counts.AcceptedCount,
 			Completed: counts.CompletedCount,
-			Handing:   counts.HandlingNumber,
+			Handling:  counts.HandlingNumber,
 		}
 		summary := mi.Summary()
 		if summary != expectedSummary {

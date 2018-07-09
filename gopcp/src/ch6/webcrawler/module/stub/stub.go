@@ -100,7 +100,7 @@ func (m *myModule) Summary() module.SummaryStruct {
 		Called:    counts.CalledCount,
 		Accepted:  counts.AcceptedCount,
 		Completed: counts.CompletedCount,
-		Handing:   counts.HandlingNumber,
+		Handling:  counts.HandlingNumber,
 		Extra:     nil,
 	}
 }
