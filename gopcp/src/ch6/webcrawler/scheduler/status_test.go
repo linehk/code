@@ -156,11 +156,11 @@ func TestCheckStatusInParallel(t *testing.T) {
 	t.Run("Check status in parallel(4)", func(t *testing.T) {
 		for i := 0; i < number; i++ {
 			currentStatus := SCHED_STATUS_STOPPED
-			wantedStatus := []Status{
+			wantedStatusList := []Status{
 				SCHED_STATUS_INITIALIZING,
 				SCHED_STATUS_STARTING,
 			}
-			for _, wantedStatus := range wantedStatus {
+			for _, wantedStatus := range wantedStatusList {
 				if err := checkStatus(currentStatus, wantedStatus,
 					nil); err != nil {
 					t.Fatalf("An error occurs when checking status: %s "+

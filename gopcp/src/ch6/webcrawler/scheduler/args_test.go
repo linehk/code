@@ -236,7 +236,7 @@ func genSimpleAnalyzers(number int8, reuseMID bool, snGen module.SNGenertor,
 	results := make([]module.Analyzer, number)
 	var mid module.MID
 	for i := int8(0); i < number; i++ {
-		if i == 0 && !reuseMID {
+		if i == 0 || !reuseMID {
 			mid = module.MID(fmt.Sprintf("A%d", snGen.Get()))
 		}
 		a, err := analyzer.New(mid, respParsers, nil)
@@ -255,7 +255,7 @@ func genSimplePipelines(number int8, reuseMID bool, snGen module.SNGenertor,
 	processors := []module.ProcessItem{processItem}
 	if number < -1 {
 		return []module.Pipeline{nil}
-	} else if number == 1 { // 不合规的 MID。
+	} else if number == -1 { // 不合规的 MID。
 		mid := module.MID(fmt.Sprintf("D%d", snGen.Get()))
 		p, err := pipeline.New(mid, processors, nil)
 		if err != nil {
@@ -280,6 +280,7 @@ func genSimplePipelines(number int8, reuseMID bool, snGen module.SNGenertor,
 	return results
 }
 
+// parseATag 代表一个响应解析函数的实现，只解析“A”标签。
 func parseATag(httpResp *http.Response,
 	respDepth uint32) ([]module.Data, []error) {
 	// TODO: 支持更多的 HTTP 响应状态。

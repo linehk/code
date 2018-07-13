@@ -6,7 +6,7 @@ import (
 
 // Counts 代表用于汇集组件内部计数的类型。
 type Counts struct {
-	// CalledCount 代表调用次数。
+	// CalledCount 代表调用计数。
 	CalledCount uint64
 	// AcceptedCount 代表接受计数。
 	AcceptedCount uint64
@@ -23,7 +23,7 @@ type SummaryStruct struct {
 	Accepted  uint64      `json:"accepted"`
 	Completed uint64      `json:"completed"`
 	Handling  uint64      `json:"handling"`
-	Extra     interface{} `json:"extra,omitempty`
+	Extra     interface{} `json:"extra,omitempty"`
 }
 
 // Module 代表组件的基础接口类型。

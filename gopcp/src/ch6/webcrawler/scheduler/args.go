@@ -51,6 +51,7 @@ func (args *RequestArgs) Same(another *RequestArgs) bool {
 	return true
 }
 
+// DataArgs 代表数据相关的参数容器的类型。
 type DataArgs struct {
 	// ReqBufferCap 代表请求缓冲器的容量。
 	ReqBufferCap uint32 `json:"req_buffer_cap"`
@@ -101,7 +102,7 @@ func (args *DataArgs) Check() error {
 // ModuleArgsSummary 代表组件相关的参数容器的摘要类型。
 type ModuleArgsSummary struct {
 	DownloaderListSize int `json:"downloader_list_size"`
-	AnalyzerListSize   int `json:"analyzer_list_size"`
+	AnalyzerListSize   int `json:"analyzer_List_size"`
 	PipelineListSize   int `json:"pipeline_list_size"`
 }
 
@@ -111,10 +112,11 @@ type ModuleArgs struct {
 	Downloaders []module.Downloader
 	// Analyzers 代表分析器列表。
 	Analyzers []module.Analyzer
-	// Pipeline 代表条目处理器管道管道列表。
+	// Pipelines 代表条目处理器管道管道列表。
 	Pipelines []module.Pipeline
 }
 
+// Check 用于当前参数容器的有效性。
 func (args *ModuleArgs) Check() error {
 	if len(args.Downloaders) == 0 {
 		return genError("empty downloader list")

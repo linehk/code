@@ -21,17 +21,6 @@ func TestSchedNew(t *testing.T) {
 	}
 }
 
-func TestInit(t *testing.T) {
-	requestArgs := genRequestArgs([]string{"bing.com"}, 0)
-	dataArgs := genDataArgs(10, 2, 1)
-	moduleArgs := genSimpleModuleArgs(3, 2, 1, t)
-	sched := NewScheduler()
-	err := sched.Init(requestArgs, dataArgs, moduleArgs)
-	if err != nil {
-		t.Fatalf("%s", err)
-	}
-}
-
 func TestSchedInit(t *testing.T) {
 	requestArgs := genRequestArgs([]string{"bing.com"}, 0)
 	dataArgs := genDataArgs(10, 2, 1)
@@ -376,7 +365,7 @@ func TestSchedSendReq(t *testing.T) {
 	// 测试调度器已停止的情况。
 	sched.Stop()
 	time.Sleep(time.Millisecond * 500)
-	if mySched.sendReq(req) {
+	if mySched.sendReq(nil) {
 		t.Fatalf("It still can send request in stopped scheduler!")
 	}
 }

@@ -130,7 +130,8 @@ func (ss *mySchedSummary) Struct() SummaryStruct {
 		Analyzers:       getModuleSummaries(registrar, module.TYPE_ANALYZER),
 		Pipelines:       getModuleSummaries(registrar, module.TYPE_PIPELINE),
 		ReqBufferPool:   getBufferPoolSummary(ss.sched.reqBufferPool),
-		RespBufferPool:  getBufferPoolSummary(ss.sched.itemBufferPool),
+		RespBufferPool:  getBufferPoolSummary(ss.sched.respBufferPool),
+		ItemBufferPool:  getBufferPoolSummary(ss.sched.itemBufferPool),
 		ErrorBufferPool: getBufferPoolSummary(ss.sched.errorBufferPool),
 		NumURL:          ss.sched.urlMap.Len(),
 	}

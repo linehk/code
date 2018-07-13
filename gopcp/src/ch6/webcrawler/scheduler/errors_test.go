@@ -19,7 +19,7 @@ func TestErrorGen(t *testing.T) {
 			werrors.NewCrawlerError("", ""), err)
 	}
 	if ce.Type() != expectedErrType {
-		t.Fatalf("Inconsistent errro type string: expected: %q, actual: %q",
+		t.Fatalf("Inconsistent error type string: expected: %q, actual: %q",
 			expectedErrType, ce.Type())
 	}
 	expectedErrMsg := "crawler error: scheduler error: " + simpleErrMsg

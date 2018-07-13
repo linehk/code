@@ -35,6 +35,7 @@ type Scheduler interface {
 	Status() Status
 	// ErrorChan 用于获得错误通道。
 	// 调度器以及各个处理模块运行过程中出现的所有错误都会被发送到该通道。
+	// 若结果值为 nil， 则说明错误通道不可用或调度器已被停止。
 	ErrorChan() <-chan error
 	// Idle 用于判断所有处理模块是否都处于空闲状态。
 	Idle() bool
@@ -358,7 +359,7 @@ func (sched *myScheduler) registerModules(moduleArgs ModuleArgs) error {
 	return nil
 }
 
-// download 会从请求缓冲池取出请求并下载。
+// download 会从请求缓冲池取出请求并下载，
 // 然后把得到的响应放入响应缓冲池。
 func (sched *myScheduler) download() {
 	go func() {
@@ -438,7 +439,7 @@ func (sched *myScheduler) analyze() {
 	}()
 }
 
-// analyzeOne 会根据给定的响应执行解析并把结果放入响应的缓冲池。
+// analyzeOne 会根据给定的响应执行解析并把结果放入相应的缓冲池。
 func (sched *myScheduler) analyzeOne(resp *module.Response) {
 	if resp == nil {
 		return
@@ -486,7 +487,7 @@ func (sched *myScheduler) analyzeOne(resp *module.Response) {
 	}
 }
 
-// pick 会从条目缓冲池取出条目处理器。
+// pick 会从条目缓冲池取出条目并处理。
 func (sched *myScheduler) pick() {
 	go func() {
 		for {
@@ -565,6 +566,7 @@ func (sched *myScheduler) sendReq(req *module.Request) bool {
 	if v := sched.urlMap.Get(reqURL.String()); v != nil {
 		logger.Warnf("Ignore the request! Its URL is repeated. (URL: %s)\n",
 			reqURL)
+		return false
 	}
 	pd, _ := getPrimaryDomain(httpReq.Host)
 	if sched.acceptedDomainMap.Get(pd) == nil {
@@ -712,7 +714,7 @@ func (sched *myScheduler) resetContext() {
 	sched.ctx, sched.cancelFunc = context.WithCancel(context.Background())
 }
 
-// canceled 用于判断调度器的上下文是否已经被取消。
+// canceled 用于判断调度器的上下文是否已被取消。
 func (sched *myScheduler) canceled() bool {
 	select {
 	case <-sched.ctx.Done():
