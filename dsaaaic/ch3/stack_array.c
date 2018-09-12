@@ -1,6 +1,6 @@
 // 栈操作 数组实现
 
-#include "8.h"
+#include "stack_array.h"
 #include "fatal.h"
 #include <stdlib.h>
 

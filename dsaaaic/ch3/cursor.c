@@ -1,5 +1,5 @@
 // 链表操作 游标实现
-#include "4.h"
+#include "cursor.h"
 #include <stdlib.h>
 #include "fatal.h"
 

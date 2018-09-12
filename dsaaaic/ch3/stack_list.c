@@ -1,4 +1,4 @@
-#include "6.h"
+#include "stack_list.h"
 #include "fatal.h"
 #include <stdlib.h>
 

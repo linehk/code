@@ -1,6 +1,6 @@
 // 队列 ADT 操作
 
-#include "10.h"
+#include "queue.h"
 #include "fatal.h"
 #include <stdlib.h>
 

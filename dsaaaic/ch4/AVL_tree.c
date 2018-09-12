@@ -1,6 +1,6 @@
 // AVL 树操作
 
-#include "2.h"
+#include "AVL_tree.h"
 #include "fatal.h"
 #include <stdlib.h>
 

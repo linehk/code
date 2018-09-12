@@ -1,6 +1,6 @@
 // 链表操作
 
-#include "1.h"
+#include "list.h"
 #include <stdlib.h>
 #include "fatal.h"
 

@@ -1,6 +1,6 @@
 // 二叉查找树操作
 
-#include "1.h"
+#include "tree.h"
 #include "fatal.h"
 #include <stdlib.h>
 
