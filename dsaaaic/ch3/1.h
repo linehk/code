@@ -1,7 +1,4 @@
 // 链表的类型声明
-
-#ifndef _List_H
-
 struct Node;
 typedef struct Node *PtrToNode;
 typedef PtrToNode List;
@@ -21,11 +18,3 @@ Position Header(List L);
 Position First(List L);
 Position Advance(Position P);
 ElementType Retrieve(Position P);
-
-#endif
-
-struct Node
-{
-        ElementType Element;
-        Position Next;
-};

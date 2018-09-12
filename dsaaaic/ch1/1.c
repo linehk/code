@@ -1,7 +1,6 @@
 // 一个递归程序
 
-int
-F(int X)
+int F(int X)
 {
         if (X == 0)
                 return 0;

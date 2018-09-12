@@ -1,20 +1,23 @@
-// 最大子序列2
+// 对分查找
 
-int
-MaxSubsequenceSum(const int A[], int N)
+#define NotFound (-1)
+typedef int ElementType;
+
+int BinarySearch(const ElementType A[], ElementType X, int N)
 {
-        int ThisSum, MaxSum, i, j;
-        MaxSum = 0;
-        for (i = 0; i < N; i++)
-        {
-                ThisSum = 0;
-                for (j = i; j < N; j++)
-                {
-                        ThisSum += A[j];
+        int Low, Mid, High;
 
-                        if (ThisSum > MaxSum)
-                                MaxSum = ThisSum;
-                }
+        Low = 0;
+        High = N - 1;
+        while (Low <= High)
+        {
+                Mid = (Low + High) / 2;
+                if (A[Mid] < X)
+                        Low = Mid + 1;
+                else if (A[Mid] > X)
+                        High = Mid - 1;
+                else
+                        return Mid;
         }
-        return MaxSum;
+        return NotFound;
 }

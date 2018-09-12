@@ -1,12 +1,10 @@
-// 栈 ADT
+// 栈 链表实现
 
-#ifndef _Stack_h
+typedef int ElementType;
 
 struct Node;
 typedef struct Node *PtrToNode;
 typedef PtrToNode Stack;
-
-typedef int ElementType;
 
 int IsEmpty(Stack S);
 Stack CreateStack(void);
@@ -15,11 +13,3 @@ void MakeEmpty(Stack S);
 void Push(ElementType X, Stack S);
 ElementType Top(Stack S);
 void Pop(Stack S);
-
-#endif
-
-struct Node
-{
-        ElementType Element;
-        PtrToNode Next;
-};

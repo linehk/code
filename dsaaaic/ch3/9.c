@@ -1,15 +1,38 @@
+// 栈操作 数组实现
+
 #include "8.h"
+#include "fatal.h"
 #include <stdlib.h>
-// 栈 ADT 数组实现
+
+#define EmptyTOS (-1)
+#define MinStackSize (5)
+
+struct StackRecord
+{
+        int Capacity;
+        int TopOfStack;
+        ElementType *Array;
+};
+
+// 检测是否为空
+int IsEmpty(Stack S)
+{
+        return S->TopOfStack == EmptyTOS;
+}
+
+// 检测是否为满
+int IsFull(Stack S)
+{
+        return S->TopOfStack == S->Capacity - 1;
+}
 
 // 栈的创建
-Stack
-CreateStack(int MaxElements)
+Stack CreateStack(int MaxElements)
 {
         Stack S;
         if (MaxElements < MinStackSize)
                 Error("Stack size is too small");
-        
+
         S = malloc(sizeof(struct StackRecord));
         if (S == NULL)
                 FatalError("Out of space!!!");
@@ -23,8 +46,7 @@ CreateStack(int MaxElements)
 }
 
 // 释放栈
-void
-DisposeStack(Stack S)
+void DisposeStack(Stack S)
 {
         if (S != NULL)
         {
@@ -33,23 +55,15 @@ DisposeStack(Stack S)
         }
 }
 
-// 检测是否为空
-int
-IsEmpty(Stack S)
-{
-        return S->TopOfStack == EmptyTOS;
-}
 
 // 创建一个空栈
-void
-MakeEmpty(Stack S)
+void MakeEmpty(Stack S)
 {
         S->TopOfStack = EmptyTOS;
 }
 
 // 进栈
-void
-Push(ElementType X, Stack S)
+void Push(ElementType X, Stack S)
 {
         if (IsFull(S))
                 Error("Full stack");
@@ -68,8 +82,7 @@ Top(Stack S)
 }
 
 // 弹出
-void
-Pop(Stack S)
+void Pop(Stack S)
 {
         if (IsEmpty(S))
                 Error("Empty stack");
@@ -78,8 +91,7 @@ Pop(Stack S)
 }
 
 // 给出并弹出
-ElementType
-TopAndPop(Stack S)
+ElementType TopAndPop(Stack S)
 {
         if (!IsEmpty(S))
                 return S->Array[S->TopOfStack--];

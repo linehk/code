@@ -1,7 +1,6 @@
 // 菲波纳契递归
 
-long int
-Fib(int N)
+long int Fib(int N)
 {
         if (N <= 1)
                 return 1;

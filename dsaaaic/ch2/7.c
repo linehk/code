@@ -1,19 +1,15 @@
-// 最大子序列4
+// 高效率的取幂运算
 
-int
-MaxSubsequenceSum(const int A[], int N)
+#define IsEven(N) ((N) % 2 == 0)
+
+long int Pow(long int X, unsigned int N)
 {
-        int ThisSum, MaxSum, j;
-
-        ThisSum = MaxSum = 0;
-        for (j = 0; j < N; j++)
-        {
-                ThisSum += A[j];
-
-                if (ThisSum > MaxSum)
-                        MaxSum = ThisSum;
-                else if (ThisSum < 0)
-                        ThisSum = 0;
-        }
-        return MaxSum;
+        if (N == 0)
+                return 1;
+        if (N == 1)
+                return X;
+        if (IsEven(N))
+                return Pow(X * X, N / 2);
+        else
+                return Pow(X * X, N / 2) * X;
 }

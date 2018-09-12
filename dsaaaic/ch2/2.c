@@ -1,7 +1,6 @@
 // 阶乘函数
 
-long int
-Factorial(int N)
+long int Factorial(int N)
 {
         if (N <= 1)
                 return 1;

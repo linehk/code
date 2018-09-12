@@ -1,7 +1,6 @@
 // i3求和函数
 
-int
-Sum(int N)
+int Sum(int N)
 {
         int i, PartialSum;
         PartialSum = 0;

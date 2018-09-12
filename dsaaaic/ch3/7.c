@@ -1,16 +1,21 @@
 #include "6.h"
+#include "fatal.h"
 #include <stdlib.h>
 
+struct Node
+{
+        ElementType Element;
+        PtrToNode Next;
+};
+
 // 测试是否为空栈
-int
-IsEmpty(Stack S)
+int IsEmpty(Stack S)
 {
         return S->Next == NULL;
 }
 
-// 建立空栈 链表实现
-Stack
-CreateStack(void)
+// 建立空栈
+Stack CreateStack(void)
 {
         Stack S;
 
@@ -22,8 +27,7 @@ CreateStack(void)
         return S;
 }
 
-void
-MakeEmpty(Stack S)
+void MakeEmpty(Stack S)
 {
         if (S == NULL)
                 Error("Must use CreateStack first");
@@ -32,9 +36,14 @@ MakeEmpty(Stack S)
                         Pop(S);
 }
 
+void DisposeStack(Stack S)
+{
+        MakeEmpty(S);
+        free(S);
+}
+
 // Push
-void
-Push(ElementType X, Stack S)
+void Push(ElementType X, Stack S)
 {
         PtrToNode TmpCell;
 
@@ -50,8 +59,7 @@ Push(ElementType X, Stack S)
 }
 
 // Top
-ElementType
-Top(Stack S)
+ElementType Top(Stack S)
 {
         if (!IsEmpty(S))
                 return S->Next->Element;
@@ -60,10 +68,10 @@ Top(Stack S)
 }
 
 // Pop
-void
-Pop(Stack S)
+void Pop(Stack S)
 {
         PtrToNode FirstCell;
+
         if (IsEmpty(S))
                 Error("Empty stack");
         else
