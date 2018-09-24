@@ -8,7 +8,7 @@ public class ResizingArrayBag<Item> implements Iterable<Item> {
   private int n;
 
   public ResizingArrayBag() {
-    a = (Item[])new Object[2];
+    a = (Item[]) new Object[2];
     n = 0;
   }
 
@@ -22,7 +22,7 @@ public class ResizingArrayBag<Item> implements Iterable<Item> {
 
   private void resize(int capacity) {
     assert capacity >= n;
-    Item[] temp = (Item[])new Object[capacity];
+    Item[] temp = (Item[]) new Object[capacity];
     for (int i = 0; i < n; i++) {
       temp[i] = a[i];
     }

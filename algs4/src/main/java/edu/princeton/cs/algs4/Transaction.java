@@ -68,7 +68,7 @@ public class Transaction implements Comparable<Transaction> {
     int hash = 1;
     hash = 31 * hash + who.hashCode();
     hash = 31 * hash + when.hashCode();
-    hash = 31 * hash + ((Double)amount).hashCode();
+    hash = 31 * hash + ((Double) amount).hashCode();
     return hash;
   }
 

@@ -105,10 +105,10 @@ public final class RectHV {
 
   @Override
   public int hashCode() {
-    int hash1 = ((Double)xmin).hashCode();
-    int hash2 = ((Double)ymin).hashCode();
-    int hash3 = ((Double)xmax).hashCode();
-    int hash4 = ((Double)ymax).hashCode();
+    int hash1 = ((Double) xmin).hashCode();
+    int hash2 = ((Double) ymin).hashCode();
+    int hash3 = ((Double) xmax).hashCode();
+    int hash4 = ((Double) ymax).hashCode();
     return 31 * (31 * (31 * hash1 + hash2) + hash3) + hash4;
   }
 

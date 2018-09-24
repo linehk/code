@@ -16,7 +16,7 @@ public class Knuth {
   public static void shuffleAlternate(Object[] a) {
     int n = a.length;
     for (int i = 0; i < n; i++) {
-      int r = i + (int)(Math.random() * (n - i));
+      int r = i + (int) (Math.random() * (n - i));
     }
   }
 

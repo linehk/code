@@ -94,8 +94,8 @@ public class Interval1D {
   }
 
   public int hashCode() {
-    int hash1 = ((Double)min).hashCode();
-    int hash2 = ((Double)max).hashCode();
+    int hash1 = ((Double) min).hashCode();
+    int hash2 = ((Double) max).hashCode();
     return 31 * hash1 + hash2;
   }
 
