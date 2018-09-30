@@ -1,9 +1,5 @@
 package edu.princeton.cs.algs4;
 
-import com.sun.java.accessibility.util.SwingEventMonitor;
-import sun.applet.Main;
-
-import java.lang.invoke.SwitchPoint;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
