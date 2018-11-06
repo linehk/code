@@ -1,37 +1,37 @@
-package GoAlgorithms
+package utils
 
 import (
         "fmt"
         "math"
 )
 
-// 交换数组中的元素
-func Swap(array []int, i, j int) {
-	array[i], array[j] = array[j], array[i]
+// 交换 Slice 中的元素
+func Swap(s []interface{}, i, j int) {
+        s[i], s[j] = s[j], s[i]
 }
 
-// 判断两个数组是否相同
-func IsSameArray(array []int, anotherArray []int) bool {
-	if len(array) != len(anotherArray) {
-		return false
-	}
-	if (array == nil) != (anotherArray == nil) {
-		return false
-	}
-	for k, v := range array {
-		if anotherArray[k] != v {
-			return false
-		}
-	}
-	return true
+// 判断两个 Slice 是否相同
+func IsSameSlice(a, b []interface{}) bool {
+        if len(a) != len(b) {
+                return false
+        }
+        if (a == nil) != (b == nil) {
+                return false
+        }
+        for i, v := range a {
+                if b[i] != v {
+                        return false
+                }
+        }
+        return true
 }
 
 // 矩阵（方阵）相乘
 func MatrixMultply(a, b [][]int) [][]int {
 	c := [][]int{
-		{0, 0},
-		{0, 0},
-	}
+	        {0, 0},
+	        {0, 0},
+        }
 	for i := 0; i < len(a); i++ {
 		for j := 0; j < len(a); j++ {
 			c[i][j] += a[i][j] * b[i][j]
@@ -41,27 +41,27 @@ func MatrixMultply(a, b [][]int) [][]int {
 }
 
 // 求平均数
-func Average(array []int) int {
+func Average(s []int) int {
 	var sum int
-	for _, v := range array {
+	for _, v := range s {
 		sum += v
 	}
-	return sum / len(array)
+	return sum / len(s)
 }
 
-// 复制数组
-func CopyArray(array []int) []int {
-	newArray := make([]int, len(array), cap(array))
-	for k, v := range array {
-		newArray[k] = v
+// 复制 Slice
+func CopySlice(s []interface{}) []interface{} {
+	newSlice := make([]interface{}, len(s))
+	for i, v := range s {
+	        newSlice[i] = v
 	}
-	return newArray
+	return newSlice
 }
 
 // 寻找最大值
-func FindMax(array []int) int {
+func FindMax(s []int) int {
 	var max int
-	for _, v := range array {
+	for _, v := range s {
 		max = v
 		if v > max {
 			max = v
@@ -82,11 +82,11 @@ func GCD(p, q int) (int, bool) {
 	return GCD(q, r)
 }
 
-// 反转数组
-func Reverse(array []int) {
-	len := len(array)
+// 反转 Slice
+func Reverse(s []interface{}) {
+	len := len(s)
 	for i := 0; i < len/2; i++ {
-		Swap(array, i, len-i-1)
+		Swap(s, i, len-i-1)
 	}
 }
 

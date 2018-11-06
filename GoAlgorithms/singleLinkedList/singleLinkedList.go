@@ -1,152 +1,151 @@
+// 带头结点的单链表
 package singleLinkedList
 
 import (
+        "errors"
         "fmt"
 )
 
 type node struct {
-        value interface{}
-        next *node
+	value interface{}
+	next  *node
 }
 
 type SingleLinkedList struct {
-        len int
-        head *node
+	length int
+	head   *node
 }
 
 func NewNode(v interface{}) *node {
-        return &node{v, nil}
+	return &node{v, nil}
 }
 
 func NewSingleLinkedList() *SingleLinkedList {
-        return &SingleLinkedList{0, NewNode(0)}
+	return &SingleLinkedList{0, NewNode(nil)}
 }
 
-func InitSingleLinkedList(array []int) *SingleLinkedList {
-        s := NewSingleLinkedList()
-        h := s.head
-        for _, v := range array {
-                s.InsertAfter(h, v)
-                h = h.next
-        }
-        return s
+func InitSingleLinkedList(s []interface{}) *SingleLinkedList {
+	n := NewSingleLinkedList()
+	for _, v := range s {
+	        n.InsertToTail(v)
+	}
+	return n
 }
+
+func (s SingleLinkedList) ToSlice() []interface{} {
+        slice := make([]interface{}, s.length)
+        cur := s.head.next
+        for i := range slice {
+                slice[i] = cur.GetValue()
+                cur = cur.next
+        }
+        return slice
+}
+
 
 func (n node) GetValue() interface{} {
-        return n.value
+	return n.value
 }
 
 func (n node) GetNext() *node {
-        return n.next
+	return n.next
 }
 
-func (l *SingleLinkedList) InsertAfter(n *node, v interface{}) bool {
-        if n == nil {
-                return false
-        }
-        newNode := NewNode(v)
-        oldNext := n.next
-        n.next = newNode
-        newNode.next = oldNext
-        l.len++
-        return true
+func (s *SingleLinkedList) InsertAfter(n *node, v interface{}) bool {
+	if n == nil {
+		return false
+	}
+	newNode := NewNode(v)
+	oldNext := n.next
+	n.next = newNode
+	newNode.next = oldNext
+	s.length++
+	return true
 }
 
-func (l *SingleLinkedList) InsertBefore(n *node, v interface{}) bool {
-        if n == nil || n == l.head {
-                return false
-        }
-        pre := l.head
-        cur := l.head.next
-        for cur != n {
-                pre = cur
-                cur = cur.next
-        }
-        if cur == nil {
-                return false
-        }
-        newNode := NewNode(v)
-        pre.next = newNode
-        newNode.next = cur
-        l.len++
-        return true
+func (s *SingleLinkedList) InsertBefore(n *node, v interface{}) bool {
+	if n == nil || n == s.head {
+		return false
+	}
+	pre := s.head
+	if pre.next != n {
+		pre = pre.next
+	}
+	newNode := NewNode(v)
+	pre.next = newNode
+	newNode.next = n
+	s.length++
+	return true
 }
 
-func (l *SingleLinkedList) InsertToHead(v interface{}) bool {
-        return l.InsertAfter(l.head, v)
+func (s *SingleLinkedList) InsertToHead(v interface{}) bool {
+	return s.InsertAfter(s.head, v)
 }
 
-func (l *SingleLinkedList) InsertToTail(v interface{}) bool {
-        cur := l.head
-        if cur.next != nil {
-                cur = cur.next
-        }
-        return l.InsertAfter(cur, v)
+func (s *SingleLinkedList) InsertToTail(v interface{}) bool {
+	cur := s.head
+	for cur.next != nil {
+		cur = cur.next
+	}
+	return s.InsertAfter(cur, v)
 }
 
-func (l *SingleLinkedList) FindByIndex(index int) *node {
-        if index < 1 || index > l.len {
-                return nil
-        }
-        cur := l.head.next
-        for i := 1; i < index; i++ {
-                cur = cur.next
-        }
-        return cur
+func (s *SingleLinkedList) FindByIndex(index int) (*node, error) {
+	if index < 0 || index >= s.length {
+		return nil, errors.New("index should < 0 and >= s.length")
+	}
+	cur := s.head.next
+	for i := 0; i < index; i++ {
+		cur = cur.next
+	}
+	return cur, nil
 }
 
-func (l *SingleLinkedList) Delete(n *node) bool {
-        if n == nil {
-                return false
-        }
+func (s *SingleLinkedList) Delete(n *node) bool {
+	if n == nil {
+		return false
+	}
 
-        pre := l.head
-        cur := l.head.next
-        for cur != nil {
-                if cur == n {
-                        break
-                }
-                pre = cur
-                cur = cur.next
-        }
-        if cur == nil {
-                return false
-        }
-        pre.next = n.next
-        n = nil
-        l.len--
-        return true
+	pre := s.head
+	if pre.next != n {
+		pre = pre.next
+	}
+
+	pre.next = n.next
+	n = nil
+	s.length--
+	return true
 }
 
-func (l SingleLinkedList) Show() string {
-        cur := l.head.next
-        format := ""
-        for cur != nil {
-                format += fmt.Sprintf("%+v", cur.GetValue())
-                cur = cur.next
-                if cur != nil {
-                        format += "->"
-                }
-        }
-        return format
+func (s SingleLinkedList) Show() string {
+	cur := s.head.next
+	format := ""
+	for cur != nil {
+		format += fmt.Sprintf("%+v", cur.GetValue())
+		cur = cur.next
+		if cur != nil {
+			format += "->"
+		}
+	}
+	return format
 }
 
-func (l *SingleLinkedList) Reverse() {
-        // if l.head == nil || l.head.next == nil || l.head.next.next == nil {
-        //         return nil
-        // }
+func (s *SingleLinkedList) Reverse() {
+	// if s.head == nil || s.head.next == nil || s.head.next.next == nil {
+	//         return nil
+	// }
 
-        if l.len < 3 {
-                return
-        }
+	if s.length < 3 {
+		return
+	}
 
-        var pre *node
-        cur := l.head.next
-        for cur != nil {
-                tmp := cur.next
-                cur.next = pre
-                pre = cur
-                cur = tmp
-        }
-        l.head.next = pre
+	var pre *node
+	cur := s.head.next
+	for cur != nil {
+		tmp := cur.next
+		cur.next = pre
+		pre = cur
+		cur = tmp
+	}
+	s.head.next = pre
 }
