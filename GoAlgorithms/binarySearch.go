@@ -23,10 +23,10 @@ func RecursiveBinarySearch(array []int, key int) bool {
 }
 
 func rank(array []int, lo, hi int, key int) bool {
-        if lo > hi {
-                return false
-        }
-	mid := lo + (hi - lo)/2
+	if lo > hi {
+		return false
+	}
+	mid := lo + (hi-lo)/2
 	if key > array[mid] {
 		return rank(array, mid+1, hi, key)
 	}

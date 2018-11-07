@@ -15,11 +15,11 @@ func TestBinarySearch(t *testing.T) {
 }
 
 func TestRecursiveBinarySearch(t *testing.T) {
- 	array := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	array := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 	keys := []int{1, 10}
 	for _, key := range keys {
 		if !RecursiveBinarySearch(array, key) {
 			t.Errorf("%d is fail", key)
 		}
-	}       
+	}
 }
