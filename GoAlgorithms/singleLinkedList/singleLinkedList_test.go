@@ -1,182 +1,290 @@
 package singleLinkedList
 
 import (
-        "GoAlgorithms/utils"
-        "fmt"
-        "testing"
+	"GoAlgorithms/utils"
+	"fmt"
+	"testing"
 )
 
 func TestNewNode(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        got := make([]interface{}, len(elt))
-        for i, v := range elt {
-                got[i] = NewNode(v).GetValue()
-        }
-        if !utils.IsSameSlice(got, elt) {
-                t.Errorf("want %v, got %v\n", elt, got)
-        }
-}
+	v := 1
 
-func TestNewSingleLinkedList(t *testing.T) {
-        s := NewSingleLinkedList()
-        wantLength := 0
-        if s.head.value != nil {
-                t.Errorf("want %v, got %v\n", nil, s.head.value)
-        }
-        if s.length != wantLength {
-                t.Errorf("want %d, got %d\n", wantLength, s.length)
-        }
-}
-
-func TestInitSingleLinkedList(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        got := n.ToSlice()
-        if !utils.IsSameSlice(got, elt) {
-                t.Errorf("want %v, got %v\n", elt, got)
-        }
-
-        // nil slice
-        elt = nil
-        n = InitSingleLinkedList(elt)
-        want := []interface{}{}
-        got = n.ToSlice()
-        if !utils.IsSameSlice(got, want) {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
-}
-
-func TestSingleLinkedList_ToSlice(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        got := n.ToSlice()
-        if !utils.IsSameSlice(got, elt) {
-                t.Errorf("want %v, got %v\n", elt, got)
-        }
+	wantValue := v
+	var wantNext *node // nil
+	gotNode := NewNode(v)
+	gotValue := gotNode.value
+	gotNext := gotNode.next
+	if gotValue != wantValue || gotNext != wantNext {
+		t.Errorf("wantValue = %v, gotValue = %v\n", wantValue, gotValue)
+		t.Errorf("wantNext = %v, gotNext = %v\n", wantNext, gotNext)
+	}
 }
 
 func TestNode_GetValue(t *testing.T) {
-        want := 0
-        n := NewNode(want)
-        got := n.GetValue()
-        if got != want {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	v := 1
+
+	want := v
+	got := NewNode(v).GetValue()
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestNode_GetNext(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        want := 1
-        got := n.head.GetNext().GetValue()
-        if got != want {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	elts := []interface{}{1, 'a', "aa"}
+	s, _ := InitSingleLinkedList(elts)
+
+	want := s.head.next
+	got := s.head.GetNext()
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+}
+
+func TestNewSingleLinkedList(t *testing.T) {
+	s := NewSingleLinkedList()
+	wantHead := &node{nil, nil}
+	wantLength := 0
+	gotHead := s.head
+	gotLength := s.length
+	if gotHead.value != wantHead.value || gotHead.next != wantHead.next {
+		t.Errorf("wantHead.value = %v, gotHead.value = %v\n", wantHead.value, gotHead.value)
+		t.Errorf("wantHead.next = %v, gotHead.next = %v\n", wantHead.next, gotHead.next)
+	}
+	if gotLength != wantLength {
+		t.Errorf("wantLength = %v, gotLength = %v\n", wantLength, gotLength)
+	}
+}
+
+func TestInitSingleLinkedList(t *testing.T) {
+	elts := []interface{}{1, 'a', "aa"}
+
+	// normal slice
+	s, _ := InitSingleLinkedList(elts)
+	want := elts
+	got := s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+
+	// nil slice
+	elts = nil
+	s, _ = InitSingleLinkedList(elts)
+	want = []interface{}{}
+	got = s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+}
+
+func TestSingleLinkedList_ToSlice(t *testing.T) {
+	elts := []interface{}{1, 'a', "aa"}
+
+	// normal list
+	s, _ := InitSingleLinkedList(elts)
+	want := elts
+	got := s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+
+	// nil list
+	s = NewSingleLinkedList()
+	want = []interface{}{}
+	got = s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestSingleLinkedList_InsertAfter(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        v := 2
-        want := []interface{}{1, v, 'a', "aa"}
-        n.InsertAfter(n.head.next, v)
-        got := n.ToSlice()
-        if !utils.IsSameSlice(got, want) {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	elts := []interface{}{1, 'a', "aa"}
+	s, _ := InitSingleLinkedList(elts)
+
+	// normal node
+	v := 2
+	s.InsertAfter(s.head.next, v)
+	want := []interface{}{1, v, 'a', "aa"}
+	got := s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+
+	// nil node
+	err := s.InsertAfter(nil, v)
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when node is nil\n")
+	}
 }
 
 func TestSingleLinkedList_InsertBefore(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        v := 2
-        want := []interface{}{1, v, 'a', "aa"}
-        n.InsertBefore(n.head.next.next, v)
-        got := n.ToSlice()
-        if !utils.IsSameSlice(got, want) {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	elts := []interface{}{1, 'a', "aa"}
+	s, _ := InitSingleLinkedList(elts)
+
+	// normal node
+	v := 2
+	s.InsertBefore(s.head.next.next, v)
+	want := []interface{}{1, v, 'a', "aa"}
+	got := s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+
+	// nil node
+	err := s.InsertBefore(nil, v)
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when node is nil\n")
+	}
+
+	// head node
+	err = s.InsertBefore(s.head, v)
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when node is head node\n")
+	}
 }
 
 func TestSingleLinkedList_InsertToHead(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        v := 2
-        want := []interface{}{v, 1, 'a', "aa"}
-        n.InsertToHead(v)
-        got := n.ToSlice()
-        if !utils.IsSameSlice(got, want) {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	elts := []interface{}{1, 'a', "aa"}
+	s, _ := InitSingleLinkedList(elts)
+
+	v := 2
+	s.InsertToHead(v)
+	want := []interface{}{v, 1, 'a', "aa"}
+	got := s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestSingleLinkedList_InsertToTail(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        v := 2
-        want := []interface{}{1, 'a', "aa", v}
-        n.InsertToTail(v)
-        got := n.ToSlice()
-        if !utils.IsSameSlice(got, want) {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
-}
+	elts := []interface{}{1, 'a', "aa"}
+	s, _ := InitSingleLinkedList(elts)
 
-func TestSingleLinkedList_FindByIndex(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        got := make([]interface{}, len(elt))
-        for i := range elt {
-                node, err := n.FindByIndex(i)
-                if err != nil {
-                        t.Errorf("err: %s\n", err)
-                }
-                got[i] = node.GetValue()
-        }
-        if !utils.IsSameSlice(got, elt) {
-                t.Errorf("want %v, got %v\n", elt, got)
-        }
-
-        // illegal index
-        if _, err := n.FindByIndex(-1); err == nil {
-                t.Errorf("index < 0, err shouldn't be %v\n", err)
-        }
-        if _, err := n.FindByIndex(len(elt)); err == nil {
-                t.Errorf("index == len, err shouldn't be %v\n", err)
-        }
-        if _, err := n.FindByIndex(len(elt) + 1); err == nil {
-                t.Errorf("index > len, err shouldn't be %v\n", err)
-        }
+	v := 2
+	s.InsertToTail(v)
+	want := []interface{}{1, 'a', "aa", v}
+	got := s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestSingleLinkedList_Delete(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        want := []interface{}{'a', "aa"}
-        if n.Delete(n.head.next) {
-                got := n.ToSlice()
-                if !utils.IsSameSlice(got, want) {
-                        t.Errorf("want %v, got %v\n", want, elt)
-                }
-        }
-}
+	elts := []interface{}{1, 'a', "aa"}
+	s, _ := InitSingleLinkedList(elts)
 
-func TestSingleLinkedList_Show(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        got := InitSingleLinkedList(elt).Show()
-        want := fmt.Sprintf("%v->%v->%v", 1, 'a', "aa")
-        if got != want {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	// normal node
+	s.Delete(s.head.next)
+	want := []interface{}{'a', "aa"}
+	got := s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+
+	// nil node
+	err := s.Delete(nil)
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when node is nil\n")
+	}
+
+	// head node
+	err = s.Delete(s.head)
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when node is head node\n")
+	}
 }
 
 func TestSingleLinkedList_Reverse(t *testing.T) {
-        elt := []interface{}{1, 'a', "aa"}
-        n := InitSingleLinkedList(elt)
-        n.Reverse()
-        got := n.ToSlice()
-        want := []interface{}{"aa", 'a', 1}
-        if !utils.IsSameSlice(got, want) {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	// normal list
+	elts := []interface{}{1, 'a', "aa"}
+	s, _ := InitSingleLinkedList(elts)
+	s.Reverse()
+	want := []interface{}{"aa", 'a', 1}
+	got := s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+
+	// 2 node
+	elts = []interface{}{1, 'a'}
+	s, _ = InitSingleLinkedList(elts)
+	s.Reverse()
+	want = []interface{}{'a', 1}
+	got = s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+
+	// 1 node
+	elts = []interface{}{1}
+	s, _ = InitSingleLinkedList(elts)
+	s.Reverse()
+	want = elts
+	got = s.ToSlice()
+	if !utils.IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+}
+
+func TestSingleLinkedList_Last(t *testing.T) {
+	v := "aa"
+	elts := []interface{}{1, 'a', v}
+	s, _ := InitSingleLinkedList(elts)
+
+	wantNode := NewNode(v)
+	wantValue := wantNode.value
+	wantNext := wantNode.next
+	gotNode, _ := s.Last()
+	gotValue := gotNode.value
+	gotNext := gotNode.next
+	if gotValue != wantValue || gotNext != wantNext {
+		t.Errorf("wantValue = %v, gotValue = %v\n", wantValue, gotValue)
+		t.Errorf("wantNext = %v, gotNext = %v\n", wantNext, gotNext)
+	}
+
+	// zero-node list
+	s = NewSingleLinkedList()
+	_, err := s.Last()
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when get the last node on a zero-node list")
+	}
+}
+
+func TestSingleLinkedList_FindByIndex(t *testing.T) {
+	elts := []interface{}{1, 'a', "aa"}
+	s, _ := InitSingleLinkedList(elts)
+
+	// normal index
+	wantNode := s.head.next
+	wantValue := wantNode.value
+	wantNext := wantNode.next
+	gotNode, _ := s.FindByIndex(0)
+	gotValue := gotNode.value
+	gotNext := gotNode.next
+	if gotValue != wantValue || gotNext != wantNext {
+		t.Errorf("wantValue = %v, gotValue = %v\n", wantValue, gotValue)
+		t.Errorf("wantNext = %v, gotNext = %v\n", wantNext, gotNext)
+	}
+
+	// illegal index (-1, len(elts), len(elts)+1)
+	if _, err := s.FindByIndex(-1); err == nil {
+		t.Errorf("err shouldn't be nil, when index = -1\n")
+	}
+	if _, err := s.FindByIndex(len(elts)); err == nil {
+		t.Errorf("err shouldn't be nil, when index = len(elts)\n")
+	}
+	if _, err := s.FindByIndex(len(elts) + 1); err == nil {
+		t.Errorf("err shouldn't be nil, when index = len(elts)+1\n")
+	}
+}
+
+func TestSingleLinkedList_Show(t *testing.T) {
+	elts := []interface{}{1, 'a', "aa"}
+	s, _ := InitSingleLinkedList(elts)
+
+	want := fmt.Sprintf("%v->%v->%v", 1, 'a', "aa")
+	got := s.Show()
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
