@@ -1,130 +1,175 @@
 package utils
 
 import (
-        "testing"
+	"testing"
 )
 
 func TestSwap(t *testing.T) {
-        got := []interface{}{1, 2, 3}
-        i := 0
-        j := 2
-        want := []interface{}{3, 2, 1}
-        Swap(got, i, j)
-        if !IsSameSlice(got, want) {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	// normal index
+	elts := []interface{}{1, 'a', "aa"}
+	i := 0
+	j := 2
+	Swap(elts, i, j)
+	want := []interface{}{"aa", 'a', 1}
+	got := elts
+	if !IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
+
+	// first illegal index
+	i = -1
+	j = 0
+	err := Swap(elts, i, j)
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when first index = %v\n", i)
+	}
+
+	i = len(elts)
+	j = 0
+	err = Swap(elts, i, j)
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when first index = %v\n", i)
+	}
+
+	// second illegal index
+	i = 0
+	j = -1
+	err = Swap(elts, i, j)
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when second index = %v\n", j)
+	}
+
+	i = 0
+	j = len(elts)
+	err = Swap(elts, i, j)
+	if err == nil {
+		t.Errorf("err shouldn't be nil, when second index = %v\n", j)
+	}
 }
 
 func TestIsSameSlice(t *testing.T) {
-        s1 := []interface{}{1, 2, 3}
-        s2 := []interface{}{1, 2, 3}
-        if got := IsSameSlice(s1, s2); !got {
-                t.Errorf("want ok, got %t\n", got)
-        }
+	s1 := []interface{}{1, 2, 3}
+	s2 := []interface{}{1, 2, 3}
+	want := true
+	got := IsSameSlice(s1, s2)
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestMatrixMultply(t *testing.T) {
-        a := [][]int{
-                {2, 2},
-                {2, 2},
-        }
-        b := [][]int{
-                {2, 2},
-                {2, 2},
-        }
-        c := [][]int{
-                {4, 4},
-                {4, 4},
-        }
-        got := MatrixMultply(a, b)
-        for i := 0; i < len(got); i++ {
-                for j := 0; j < len(got); j++ {
-                        if got[i][j] != c[i][j] {
-                                t.Errorf("want %v, got %v\n", c[i][j], got[i][j])
-                        }
-                }
-        }
+	a := [][]int{
+		{2, 2},
+		{2, 2},
+	}
+	b := [][]int{
+		{2, 2},
+		{2, 2},
+	}
+
+	want := [][]int{
+		{4, 4},
+		{4, 4},
+	}
+	got := MatrixMultply(a, b)
+	for i := 0; i < len(got); i++ {
+		for j := 0; j < len(got); j++ {
+			if got[i][j] != want[i][j] {
+				t.Errorf("want %v, got %v\n", want, got)
+			}
+		}
+	}
 }
 
 func TestAverage(t *testing.T) {
-        s := []int{2, 2, 2, 2}
-        got := Average(s)
-        want := 2
-        if got != want {
-                t.Errorf("want %d, got %d\n", want, got)
-        }
+	elts := []int{2, 2, 2, 2}
+
+	want := 2
+	got := Average(elts)
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestCopySlice(t *testing.T) {
-        want := []interface{}{1, 2, 3}
-        got := CopySlice(want)
-        if !IsSameSlice(want, got) {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	elts := []interface{}{1, 2, 3}
+
+	want := elts
+	got := CopySlice(elts)
+	if !IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestFindMax(t *testing.T) {
-        s := []int{1, 2, 3, 4, 5}
-        want := 5
-        got := FindMax(s)
-        if got != want {
-                t.Errorf("want %d, got %d\n", want, got)
-        }
+	elts := []int{1, 2, 3, 4, 5}
+
+	want := 5
+	got := FindMax(elts)
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestGCD(t *testing.T) {
-        want := 4
-        p := 4
-        q := 8
-        got, ok := GCD(p, q)
+	p := 4
+	q := 8
 
-        if got != want || !ok {
-                t.Errorf("want %d, got %d\n", want, got)
-        }
+	want := 4
+	got, _ := GCD(p, q)
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestReverse(t *testing.T) {
-        got := []interface{}{1, 2, 3}
-        want := []interface{}{3, 2, 1}
-        Reverse(got)
-        if !IsSameSlice(got, want) {
-                t.Errorf("want %v, got %v\n", want, got)
-        }
+	elts := []interface{}{1, 2, 3}
+
+	Reverse(elts)
+	want := []interface{}{3, 2, 1}
+	got := elts
+	if !IsSameSlice(got, want) {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestIsPrime(t *testing.T) {
-        n := 5
-        if ok := IsPrime(n); !ok {
-                t.Errorf("%d is prime? %t\n", n, ok)
-        }
+	prime := 5
+
+	want := true
+	got := IsPrime(prime)
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestSqrt(t *testing.T) {
-        n := 4.0
-        want := 2.0
-        got := Sqrt(n)
-        if got != want {
-                t.Errorf("want %f, got %f\n", want, got)
-        }
+	num := 4.0
+
+	want := 2.0
+	got := Sqrt(num)
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestHypotenuse(t *testing.T) {
-        a := 3.0
-        b := 4.0
-        want := 5.0
+	a := 3.0
+	b := 4.0
 
-        got := Hypotenuse(a, b)
-        if got != want {
-                t.Errorf("want %f, got %f\n", want, got)
-        }
+	want := 5.0
+	got := Hypotenuse(a, b)
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }
 
 func TestHarmonic(t *testing.T) {
-        n := 3
-        want := 11.0 / 6.0
-        got := Harmonic(n)
+	n := 3
 
-        if got != want {
-                t.Errorf("want %f, got %f\n", want, got)
-        }
+	want := 11.0 / 6.0
+	got := Harmonic(n)
+	if got != want {
+		t.Errorf("want %v, got %v\n", want, got)
+	}
 }

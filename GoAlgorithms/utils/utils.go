@@ -1,37 +1,41 @@
 package utils
 
 import (
-        "fmt"
-        "math"
+	"errors"
+	"math"
 )
 
-// 交换 Slice 中的元素
-func Swap(s []interface{}, i, j int) {
-        s[i], s[j] = s[j], s[i]
+func Swap(s []interface{}, i, j int) error {
+	if i < 0 || i >= len(s) {
+		return errors.New("first index can't be < 0 or >= len(s)")
+	}
+	if j < 0 || j >= len(s) {
+		return errors.New("second index can't be < 0 or >= len(s)")
+	}
+	s[i], s[j] = s[j], s[i]
+	return nil
 }
 
-// 判断两个 Slice 是否相同
 func IsSameSlice(a, b []interface{}) bool {
-        if len(a) != len(b) {
-                return false
-        }
-        if (a == nil) != (b == nil) {
-                return false
-        }
-        for i, v := range a {
-                if b[i] != v {
-                        return false
-                }
-        }
-        return true
+	if len(a) != len(b) {
+		return false
+	}
+	if (a == nil) != (b == nil) {
+		return false
+	}
+	for i, v := range a {
+		if b[i] != v {
+			return false
+		}
+	}
+	return true
 }
 
-// 矩阵（方阵）相乘
 func MatrixMultply(a, b [][]int) [][]int {
 	c := [][]int{
-	        {0, 0},
-	        {0, 0},
-        }
+		{0, 0},
+		{0, 0},
+	}
 	for i := 0; i < len(a); i++ {
 		for j := 0; j < len(a); j++ {
 			c[i][j] += a[i][j] * b[i][j]
@@ -40,7 +44,6 @@ func MatrixMultply(a, b [][]int) [][]int {
 	return c
 }
 
-// 求平均数
 func Average(s []int) int {
 	var sum int
 	for _, v := range s {
@@ -49,16 +52,14 @@ func Average(s []int) int {
 	return sum / len(s)
 }
 
-// 复制 Slice
 func CopySlice(s []interface{}) []interface{} {
 	newSlice := make([]interface{}, len(s))
 	for i, v := range s {
-	        newSlice[i] = v
+		newSlice[i] = v
 	}
 	return newSlice
 }
 
-// 寻找最大值
 func FindMax(s []int) int {
 	var max int
 	for _, v := range s {
@@ -70,7 +71,6 @@ func FindMax(s []int) int {
 	return max
 }
 
-// 计算两个非负整数的最大公约数
 func GCD(p, q int) (int, bool) {
 	if p < 0 && q < 0 {
 		return 0, false
@@ -82,15 +82,13 @@ func GCD(p, q int) (int, bool) {
 	return GCD(q, r)
 }
 
-// 反转 Slice
 func Reverse(s []interface{}) {
-	len := len(s)
-	for i := 0; i < len/2; i++ {
-		Swap(s, i, len-i-1)
+	length := len(s)
+	for i := 0; i < length/2; i++ {
+		Swap(s, i, length-i-1)
 	}
 }
 
-// 判断是否是素数
 func IsPrime(n int) bool {
 	if n < 2 {
 		return false
@@ -103,29 +101,26 @@ func IsPrime(n int) bool {
 	return true
 }
 
-// 计算平方根（牛顿迭代法）
+// Newton's method
 func Sqrt(c float64) float64 {
-        if c < 0 {
-                fmt.Errorf("c shoule positive")
-        }
-        err := 1e-15
-        t := c
-        for math.Abs(t - c / t) > err * t {
-                t = (c / t + t) / 2.0
-        }
-        return t
+	err := 1e-15
+	t := c
+	for math.Abs(t-c/t) > err*t {
+		t = (c/t + t) / 2.0
+	}
+	return t
 }
 
-// 计算三角形的斜边
+// Calculate the hypotenuse of a triangle
 func Hypotenuse(a, b float64) float64 {
-        return Sqrt(a*a+b*b)
+	return Sqrt(a*a + b*b)
 }
 
-// 计算调和级数
+// Calculate Harmonic
 func Harmonic(n int) float64 {
-        sum := 0.0
-        for i := 1; i <= n; i++ {
-                sum += 1.0 / float64(i)
-        }
-        return sum
+	sum := 0.0
+	for i := 1; i <= n; i++ {
+		sum += 1.0 / float64(i)
+	}
+	return sum
 }
