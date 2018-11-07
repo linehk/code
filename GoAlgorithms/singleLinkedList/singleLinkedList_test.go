@@ -227,10 +227,10 @@ func TestSingleLinkedList_Reverse(t *testing.T) {
 }
 
 func TestSingleLinkedList_Last(t *testing.T) {
+	// normal list
 	v := "aa"
 	elts := []interface{}{1, 'a', v}
 	s, _ := InitSingleLinkedList(elts)
-
 	wantNode := NewNode(v)
 	wantValue := wantNode.value
 	wantNext := wantNode.next

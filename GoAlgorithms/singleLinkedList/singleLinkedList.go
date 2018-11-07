@@ -58,6 +58,7 @@ func (s *SingleLinkedList) InsertAfter(n *node, v interface{}) error {
 	if n == nil {
 		return errors.New("node can't be nil")
 	}
+
 	newNode := NewNode(v)
 	newNode.next = n.next
 	n.next = newNode
@@ -72,8 +73,9 @@ func (s *SingleLinkedList) InsertBefore(n *node, v interface{}) error {
 	}
 	// can't insert before head node
 	if n == s.head {
-		return errors.New("node can't be s.head")
+		return errors.New("can't insert before head")
 	}
+
 	pre := s.head
 	for pre.next != n {
 		pre = pre.next
@@ -120,7 +122,7 @@ func (s *SingleLinkedList) Delete(n *node) error {
 	return nil
 }
 
-func (s *SingleLinkedList) Reverse() error {
+func (s *SingleLinkedList) Reverse() {
 	var pre *node
 	cur := s.head.next
 	for cur != nil {
@@ -130,18 +132,18 @@ func (s *SingleLinkedList) Reverse() error {
 		cur = tmp
 	}
 	s.head.next = pre
-	return nil
 }
 
 func (s SingleLinkedList) Last() (*node, error) {
 	if s.head.next == nil {
 		return nil, errors.New("list can't be have 0 node")
 	}
-	h := s.head
-	for h.next != nil {
-		h = h.next
+
+	last := s.head
+	for last.next != nil {
+		last = last.next
 	}
-	return h, nil
+	return last, nil
 }
 
 // got first effective node when index = 0
@@ -149,6 +151,7 @@ func (s *SingleLinkedList) FindByIndex(index int) (*node, error) {
 	if index < 0 || index >= s.length {
 		return nil, errors.New("index can't be < 0 or >= s.length")
 	}
+
 	cur := s.head.next
 	for i := 0; i < index; i++ {
 		cur = cur.next
