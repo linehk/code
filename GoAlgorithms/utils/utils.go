@@ -1,19 +1,11 @@
 package utils
 
 import (
-	"errors"
 	"math"
 )
 
-func Swap(s []interface{}, i, j int) error {
-	if i < 0 || i >= len(s) {
-		return errors.New("first index can't be < 0 or >= len(s)")
-	}
-	if j < 0 || j >= len(s) {
-		return errors.New("second index can't be < 0 or >= len(s)")
-	}
+func Swap(s []interface{}, i, j int) {
 	s[i], s[j] = s[j], s[i]
-	return nil
 }
 
 func IsSameSlice(a, b []interface{}) bool {
@@ -71,12 +63,12 @@ func FindMax(s []int) int {
 	return max
 }
 
-func GCD(p, q int) (int, bool) {
+func GCD(p, q int) int {
 	if p < 0 && q < 0 {
-		return 0, false
+		return 0
 	}
 	if q == 0 {
-		return p, true
+		return p
 	}
 	r := p % q
 	return GCD(q, r)

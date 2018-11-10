@@ -5,7 +5,6 @@ import (
 )
 
 func TestSwap(t *testing.T) {
-	// normal index
 	elts := []interface{}{1, 'a', "aa"}
 	i := 0
 	j := 2
@@ -14,36 +13,6 @@ func TestSwap(t *testing.T) {
 	got := elts
 	if !IsSameSlice(got, want) {
 		t.Errorf("want %v, got %v\n", want, got)
-	}
-
-	// first illegal index
-	i = -1
-	j = 0
-	err := Swap(elts, i, j)
-	if err == nil {
-		t.Errorf("err shouldn't be nil, when first index = %v\n", i)
-	}
-
-	i = len(elts)
-	j = 0
-	err = Swap(elts, i, j)
-	if err == nil {
-		t.Errorf("err shouldn't be nil, when first index = %v\n", i)
-	}
-
-	// second illegal index
-	i = 0
-	j = -1
-	err = Swap(elts, i, j)
-	if err == nil {
-		t.Errorf("err shouldn't be nil, when second index = %v\n", j)
-	}
-
-	i = 0
-	j = len(elts)
-	err = Swap(elts, i, j)
-	if err == nil {
-		t.Errorf("err shouldn't be nil, when second index = %v\n", j)
 	}
 }
 
@@ -116,7 +85,7 @@ func TestGCD(t *testing.T) {
 	q := 8
 
 	want := 4
-	got, _ := GCD(p, q)
+	got := GCD(p, q)
 	if got != want {
 		t.Errorf("want %v, got %v\n", want, got)
 	}
