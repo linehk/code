@@ -34,6 +34,10 @@ func (l *list) Delete(n *node) {
 	}
 
 	pre.next = n.next
+
+        n.value = nil
+	n.next = nil
+	n = nil
 }
 
 func (l list) Show() string {

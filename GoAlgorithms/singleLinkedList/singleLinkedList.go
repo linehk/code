@@ -16,10 +16,9 @@ type list struct {
 
 func New() *list {
 	l := new(list)
-	n := new(node)
-	n.value = nil
-	n.next = nil
-	l.head = n
+	l.head = new(node)
+	l.head.value = nil
+	l.head.next = nil
 	return l
 }
 
@@ -35,6 +34,10 @@ func (l *list) Delete(n *node) {
 	}
 
 	pre.next = n.next
+
+        n.value = nil
+	n.next = nil
+	n = nil
 }
 
 func (l list) Show() string {
