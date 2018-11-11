@@ -35,7 +35,7 @@ func (l *list) Delete(n *node) {
 
 	pre.next = n.next
 
-        n.value = nil
+	n.value = nil
 	n.next = nil
 	n = nil
 }
