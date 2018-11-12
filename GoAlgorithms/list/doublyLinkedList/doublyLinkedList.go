@@ -25,19 +25,19 @@ func New() *list {
 func (l *list) Insert(n, mark *node) {
 	n.next = mark.next
 	n.prev = mark
-	// empty list wouldn't execute
-	if mark.next != nil || mark.prev != nil {
-		mark.next.prev = n
-	}
+	// last node didn't execute
+	if mark.next != nil {
+	        mark.next.prev = n
+        }
 	mark.next = n
 }
 
 func (l *list) Delete(n *node) {
 	n.prev.next = n.next
-	// empty list wouldn't execute
-	if n.next != nil || n.prev != l.head {
-		n.next.prev = n.prev
-	}
+	// last node didn't execute
+	if n.next != nil {
+	        n.next.prev = n.prev
+        }
 
 	n.value = nil
 	n.next = nil
