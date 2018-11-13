@@ -27,8 +27,8 @@ func (l *list) Insert(n, mark *node) {
 	n.prev = mark
 	// last node didn't execute
 	if mark.next != nil {
-	        mark.next.prev = n
-        }
+		mark.next.prev = n
+	}
 	mark.next = n
 }
 
@@ -36,8 +36,8 @@ func (l *list) Delete(n *node) {
 	n.prev.next = n.next
 	// last node didn't execute
 	if n.next != nil {
-	        n.next.prev = n.prev
-        }
+		n.next.prev = n.prev
+	}
 
 	n.value = nil
 	n.next = nil

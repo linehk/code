@@ -1,42 +1,42 @@
 package doublyCycleLinkedList
 
 import (
-        "fmt"
+	"fmt"
 )
 
 type node struct {
-        value interface{}
-        next *node
-        prev *node
+	value interface{}
+	next  *node
+	prev  *node
 }
 
 type list struct {
-        head *node
+	head *node
 }
 
 func New() *list {
-        l := new(list)
-        l.head = new(node)
-        l.head.value = nil
-        l.head.next = l.head
-        l.head.prev = l.head
-        return l
+	l := new(list)
+	l.head = new(node)
+	l.head.value = nil
+	l.head.next = l.head
+	l.head.prev = l.head
+	return l
 }
 
 func (l *list) Insert(n, mark *node) {
-        n.next = mark.next
-        n.prev = mark
-        mark.next.prev = n
-        mark.next = n
+	n.next = mark.next
+	n.prev = mark
+	mark.next.prev = n
+	mark.next = n
 }
 
 func (l *list) Delete(n *node) {
-        n.prev.next = n.next
-        n.next.prev = n.prev
+	n.prev.next = n.next
+	n.next.prev = n.prev
 }
 
 func (l list) Show() string {
-        format := ""
+	format := ""
 	cur := l.head
 	for cur.next != l.head {
 		cur = cur.next

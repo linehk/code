@@ -5,7 +5,7 @@ import (
 )
 
 func TestDoublyLinkedList(t *testing.T) {
-        l := New()
+	l := New()
 
 	// insert empty list
 	l.Insert(&node{3, nil, nil}, l.head)

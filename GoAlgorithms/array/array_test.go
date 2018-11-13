@@ -1,7 +1,7 @@
 package array
 
 import (
-        "testing"
+	"testing"
 )
 
 func TestArray(t *testing.T) {

@@ -1,11 +1,11 @@
 package doublyCycleLinkedList
 
 import (
-        "testing"
+	"testing"
 )
 
-func TestDoublyCycleLinkedList(t *testing.T)  {
-        l := New()
+func TestDoublyCycleLinkedList(t *testing.T) {
+	l := New()
 
 	// insert empty list
 	l.Insert(&node{3, nil, nil}, l.head)
