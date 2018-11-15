@@ -1,7 +1,7 @@
 package array
 
 type array struct {
-	len      int // available element numbers
+	len      int // available element counts
 	cap      int
 	elements []interface{}
 }
@@ -14,6 +14,7 @@ func New(cap int) *array {
 	return a
 }
 
+// Only get available element (not nil)
 func (a array) Get(i int) interface{} {
 	if i < 0 || i >= a.len {
 		return nil
@@ -22,6 +23,7 @@ func (a array) Get(i int) interface{} {
 	return a.elements[i]
 }
 
+// Only set available element (not nil)
 func (a *array) Set(i int, v interface{}) {
 	if i < 0 || i >= a.len {
 		return
@@ -30,7 +32,7 @@ func (a *array) Set(i int, v interface{}) {
 	a.elements[i] = v
 }
 
-// Insert v at index i
+// Insert v at index i (allow insert at nil element)
 func (a *array) Insert(i int, v interface{}) {
 	if i < 0 || i >= a.cap {
 		return
@@ -48,9 +50,13 @@ func (a *array) Insert(i int, v interface{}) {
 	a.len++
 }
 
-// Delete element in i
+// Delete element in i (only delete available element)
 func (a *array) Delete(i int) {
 	if i < 0 || i >= a.len {
+		return
+	}
+
+	if a.len-1 < 0 {
 		return
 	}
 
