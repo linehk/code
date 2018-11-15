@@ -1,4 +1,4 @@
-package GoAlgorithms
+package search
 
 func BinarySearch(array []int, key int) bool {
 	lo := 0

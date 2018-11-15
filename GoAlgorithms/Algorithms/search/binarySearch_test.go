@@ -1,4 +1,4 @@
-package GoAlgorithms
+package search
 
 import (
 	"testing"
