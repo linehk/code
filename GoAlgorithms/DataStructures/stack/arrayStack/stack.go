@@ -19,8 +19,8 @@ func (s *stack) Push(v interface{}) {
 		return
 	}
 
-	s.elements[s.top+1] = v
 	s.top++
+	s.elements[s.top] = v
 }
 
 func (s *stack) Pop() interface{} {
