@@ -11,14 +11,9 @@ func TestQueue(t *testing.T) {
 	q.Enqueue(3)
 	t.Log(q)
 
-	q.Enqueue(1)
-	t.Log(q)
-
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
 	t.Log(q.Dequeue())
 	t.Log(q)
 
-	t.Log(q.Dequeue())
+	q.Enqueue(10)
 	t.Log(q)
 }

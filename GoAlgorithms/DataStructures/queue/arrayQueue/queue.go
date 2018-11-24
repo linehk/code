@@ -19,8 +19,19 @@ func New(cap int) *queue {
 }
 
 func (q *queue) Enqueue(v interface{}) {
-	if q.rear == q.cap {
+	// full queue
+	if q.rear == q.cap && q.front == 0 {
 		return
+	}
+	// rearrange array
+	if q.rear == q.cap && q.front != 0 {
+		n := q.rear - q.front
+		for i := 0; i < n; i++ {
+			q.elements[i] = q.elements[q.cap-n+i]
+			q.elements[q.cap-n+i] = nil
+		}
+		q.front = 0
+		q.rear = n
 	}
 	q.elements[q.rear] = v
 	q.rear++
