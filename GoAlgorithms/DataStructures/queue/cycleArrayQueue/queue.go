@@ -1,3 +1,4 @@
+// cycleArrayQueue in memory doesn't in order
 package cycleArrayQueue
 
 type queue struct {
@@ -10,7 +11,8 @@ type queue struct {
 
 func New(cap int) *queue {
 	q := new(queue)
-	q.cap = cap
+	// extra one node
+	q.cap = cap + 1
 	q.len = 0
 	q.front = 0
 	q.rear = 0
