@@ -1,2 +1,3 @@
-# 《Go 语言实战》
-# 《Go In Action》
+# Go 语言实战
+
+https://book.douban.com/subject/27015617/
