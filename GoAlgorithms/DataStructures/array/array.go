@@ -1,11 +1,17 @@
+// Package array implements DataStructure array can dynamically grow and shark.
 package array
 
+import (
+	"errors"
+)
+
 type array struct {
-	len      int // available element counts
+	len      int
 	cap      int
 	elements []interface{}
 }
 
+// New creates a array with cap.
 func New(cap int) *array {
 	a := new(array)
 	a.len = 0
@@ -14,56 +20,92 @@ func New(cap int) *array {
 	return a
 }
 
-// Only get available element (not nil)
-func (a array) Get(i int) interface{} {
-	if i < 0 || i >= a.len {
-		return nil
+// Get returns the value at i.
+func (a array) Get(i int) (interface{}, error) {
+	if i < 0 || i > a.len-1 {
+		return nil, errors.New("illegal index")
 	}
 
-	return a.elements[i]
+	return a.elements[i], nil
 }
 
-// Only set available element (not nil)
-func (a *array) Set(i int, v interface{}) {
-	if i < 0 || i >= a.len {
-		return
+// Append insert v at array last.
+func (a *array) Append(v interface{}) {
+	if a.len+1 > a.cap {
+		a.resize(a.cap * 2)
 	}
 
-	a.elements[i] = v
+	a.elements[a.len] = v
+	a.len++
 }
 
-// Insert v at index i (allow insert at nil element)
-func (a *array) Insert(i int, v interface{}) {
-	if i < 0 || i >= a.cap {
-		return
+// Insert inserts v before i.
+func (a *array) Insert(i int, v interface{}) error {
+	if i < 0 || i > a.len-1 {
+		return errors.New("illegal index")
 	}
 
 	if a.len+1 > a.cap {
-		return
+		a.resize(a.cap * 2)
 	}
 
-	for lastIndex := a.len - 1; lastIndex >= i; lastIndex-- {
-		a.elements[lastIndex+1] = a.elements[lastIndex]
+	for last := a.len - 1; last >= i; last-- {
+		a.elements[last+1] = a.elements[last]
 	}
 
 	a.elements[i] = v
 	a.len++
+	return nil
 }
 
-// Delete element in i (only delete available element)
-func (a *array) Delete(i int) {
+// Delete deletes the element at i.
+func (a *array) Delete(i int) error {
 	if i < 0 || i >= a.len {
-		return
+		return errors.New("illegal index")
 	}
 
-	if a.len-1 < 0 {
-		return
+	if a.len-1 < a.cap/4 {
+		a.resize(a.cap / 2)
 	}
 
-	for ; i < a.len-1; i++ {
-		a.elements[i] = a.elements[i+1]
+	for cur := i; cur < a.len-1; cur++ {
+		a.elements[cur] = a.elements[cur+1]
 	}
 
 	a.elements[a.len-1] = nil
 	a.len--
+	return nil
+}
+
+// Remove removes the element when the value = v.
+func (a *array) Remove(v interface{}) error {
+	for i := 0; i < a.len; i++ {
+		if a.elements[i] == v {
+			err := a.Delete(i)
+			i--
+			if err != nil {
+				return err
+			}
+		}
+	}
+	return nil
+}
+
+// Find returns the index of the first occurrence element with v.
+func (a array) Find(v interface{}) (int, error) {
+	for i := 0; i < a.len; i++ {
+		if a.elements[i] == v {
+			return i, nil
+		}
+	}
+	return 0, errors.New("element not exist")
+}
+
+func (a *array) resize(cap int) {
+	a.cap = cap
+	newElements := make([]interface{}, a.cap)
+	for i := 0; i < a.len; i++ {
+		newElements[i] = a.elements[i]
+	}
+	a.elements = newElements
 }
