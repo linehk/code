@@ -36,18 +36,22 @@ func NewNode(v interface{}) *node {
 	return n
 }
 
+// Value returns the node value.
 func (n node) Value() interface{} {
 	return n.value
 }
 
+// Next returns node the next node.
 func (n node) Next() *node {
 	return n.next
 }
 
+// List returns the list belong to node.
 func (n node) List() *list {
 	return n.list
 }
 
+// Head returns the head node belong to the list.
 func (l list) Head() *node {
 	return l.head
 }
