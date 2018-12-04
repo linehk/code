@@ -60,4 +60,23 @@ func TestDelete(t *testing.T) {
 }
 
 func TestShow(t *testing.T) {
+	tests := []struct {
+		nodes []*node
+		want  string
+	}{
+		{[]*node{NewNode(0)}, "0"},
+		{[]*node{NewNode(2), NewNode(1), NewNode(0)}, "0->1->2"},
+	}
+	for i, tt := range tests {
+		l := New()
+		for _, v := range tt.nodes {
+			if err := l.Insert(v, l.head); err != nil {
+				t.Error(err)
+			}
+		}
+
+		if got := l.Show(); got != tt.want {
+			t.Errorf("%v. got %v, want %v", i, got, tt.want)
+		}
+	}
 }
