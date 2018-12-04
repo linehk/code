@@ -29,7 +29,17 @@ func (a array) Get(i int) (interface{}, error) {
 	return a.elements[i], nil
 }
 
-// Append insert v at array last.
+// Len returns array available element counts.
+func (a array) Len() int {
+	return a.len
+}
+
+// Cap returns array capacity.
+func (a array) Cap() int {
+	return a.cap
+}
+
+// Append inserts v at array last.
 func (a *array) Append(v interface{}) {
 	if a.len+1 > a.cap {
 		a.resize(a.cap * 2)
