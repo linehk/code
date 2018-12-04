@@ -68,42 +68,6 @@ func TestDelete(t *testing.T) {
 	}
 }
 
-func TestRemove(t *testing.T) {
-	a := New(4)
-	value := 1
-	slice := []interface{}{0, 0, value, value}
-	want := []interface{}{0, 0, nil, nil}
-	for _, v := range slice {
-		a.Append(v)
-	}
-	err := a.Remove(value)
-	if err != nil {
-		t.Error(err)
-	}
-	got := a.elements
-	if !utils.IsSameSlice(got, want) {
-		t.Errorf("want %v, got %v", want, got)
-	}
-}
-
-func TestFind(t *testing.T) {
-	a := New(4)
-	value := 1
-	slice := []interface{}{0, 0, value, value}
-	want := value
-	for _, v := range slice {
-		a.Append(v)
-	}
-	i, err := a.Find(value)
-	if err != nil {
-		t.Error(err)
-	}
-	got := a.elements[i]
-	if got != want {
-		t.Errorf("want %v, got %v", want, got)
-	}
-}
-
 func TestResize(t *testing.T) {
 	a := New(1)
 	want := cap(a.elements) * 2

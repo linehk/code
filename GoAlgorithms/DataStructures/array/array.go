@@ -77,30 +77,6 @@ func (a *array) Delete(i int) error {
 	return nil
 }
 
-// Remove removes the element when the value = v.
-func (a *array) Remove(v interface{}) error {
-	for i := 0; i < a.len; i++ {
-		if a.elements[i] == v {
-			err := a.Delete(i)
-			i--
-			if err != nil {
-				return err
-			}
-		}
-	}
-	return nil
-}
-
-// Find returns the index of the first occurrence element with v.
-func (a array) Find(v interface{}) (int, error) {
-	for i := 0; i < a.len; i++ {
-		if a.elements[i] == v {
-			return i, nil
-		}
-	}
-	return 0, errors.New("element not exist")
-}
-
 func (a *array) resize(cap int) {
 	a.cap = cap
 	newElements := make([]interface{}, a.cap)
