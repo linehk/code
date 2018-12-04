@@ -4,23 +4,79 @@ import (
 	"testing"
 )
 
-func TestDoublyLinkedList(t *testing.T) {
-	l := New()
+func TestInsert(t *testing.T) {
+	tests := []struct {
+		nodes []*node
+		want  string
+	}{
+		{[]*node{NewNode(0)}, "0"},
+		{[]*node{NewNode(2), NewNode(1), NewNode(0)}, "0->1->2"},
+	}
+	for i, tt := range tests {
+		l := New()
+		for _, v := range tt.nodes {
+			if err := l.Insert(v, l.head); err != nil {
+				t.Error(err)
+			}
+		}
 
-	// insert empty list
-	l.Insert(&node{3, nil, nil}, l.head)
-	t.Log(l.Show())
+		if got := l.Show(); got != tt.want {
+			t.Errorf("%v. got %v, want %v", i, got, tt.want)
+		}
+	}
+}
 
-	// delete only one node
-	l.Delete(l.head.next)
-	t.Log(l.Show())
+func TestDelete(t *testing.T) {
+	tests := []struct {
+		nodes []*node
+		index int
+		want  string
+	}{
+		{[]*node{NewNode(0)}, 1, ""},
+		{[]*node{NewNode(2), NewNode(1), NewNode(0)}, 1, "1->2"},
+		{[]*node{NewNode(2), NewNode(1), NewNode(0)}, 3, "0->1"},
+	}
+	for i, tt := range tests {
+		l := New()
+		for _, v := range tt.nodes {
+			if err := l.Insert(v, l.head); err != nil {
+				t.Error(err)
+			}
+		}
 
-	l.Insert(&node{2, nil, nil}, l.head)
-	// insert after last node
-	l.Insert(&node{1, nil, nil}, l.head.next)
-	t.Log(l.Show())
+		node := l.head
+		for index := 0; index < tt.index; index++ {
+			node = node.next
+		}
 
-	// delete last node
-	l.Delete(l.head.next.next)
-	t.Log(l.Show())
+		if err := l.Delete(node); err != nil {
+			t.Error(err)
+		}
+
+		if got := l.Show(); got != tt.want {
+			t.Errorf("%v. got %v, want %v", i, got, tt.want)
+		}
+	}
+}
+
+func TestShow(t *testing.T) {
+	tests := []struct {
+		nodes []*node
+		want  string
+	}{
+		{[]*node{NewNode(0)}, "0"},
+		{[]*node{NewNode(2), NewNode(1), NewNode(0)}, "0->1->2"},
+	}
+	for i, tt := range tests {
+		l := New()
+		for _, v := range tt.nodes {
+			if err := l.Insert(v, l.head); err != nil {
+				t.Error(err)
+			}
+		}
+
+		if got := l.Show(); got != tt.want {
+			t.Errorf("%v. got %v, want %v", i, got, tt.want)
+		}
+	}
 }
