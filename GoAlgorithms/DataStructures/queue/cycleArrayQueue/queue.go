@@ -1,5 +1,10 @@
-// cycleArrayQueue in memory doesn't in order
+// Package cycleArrayQueue implements queue by slice.
+// elements[] in memory doesn't in order.
 package cycleArrayQueue
+
+import (
+	"errors"
+)
 
 type queue struct {
 	cap      int
@@ -9,6 +14,15 @@ type queue struct {
 	elements []interface{}
 }
 
+func (q queue) Cap() int {
+	return q.cap - 1
+}
+
+func (q queue) Len() int {
+	return q.len
+}
+
+// New creates a queue by cap.
 func New(cap int) *queue {
 	q := new(queue)
 	// extra one node
@@ -20,22 +34,27 @@ func New(cap int) *queue {
 	return q
 }
 
-func (q *queue) Enqueue(v interface{}) {
+// Enqueue inserts v in the queue.
+func (q *queue) Enqueue(v interface{}) error {
 	if (q.rear+1)%q.cap == q.front {
-		return
+		return errors.New("queue is full")
 	}
+
 	q.elements[q.rear] = v
 	q.rear = (q.rear + 1) % q.cap
 	q.len++
+	return nil
 }
 
-func (q *queue) Dequeue() interface{} {
+// Dequeue deletes v in the queue and return it.
+func (q *queue) Dequeue() (interface{}, error) {
 	if q.front == q.rear {
-		return nil
+		return nil, errors.New("queue is empty")
 	}
+
 	v := q.elements[q.front]
 	q.elements[q.front] = nil
 	q.front = (q.front + 1) % q.cap
 	q.len--
-	return v
+	return v, nil
 }

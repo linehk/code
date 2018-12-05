@@ -5,34 +5,20 @@ import (
 )
 
 func TestQueue(t *testing.T) {
+	seq := []interface{}{0, 1, 2, 3}
 	q := New()
-	q.Enqueue(1)
-	q.Enqueue(2)
-	q.Enqueue(3)
-	q.Enqueue(4)
 
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
+	for _, v := range seq {
+		q.Enqueue(v)
+	}
 
-	q.Enqueue(1)
-	q.Enqueue(2)
-	q.Enqueue(3)
-	q.Enqueue(4)
-
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
-
-	q.Enqueue(1)
-	q.Enqueue(2)
-	q.Enqueue(3)
-	q.Enqueue(4)
-
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
-	t.Log(q.Dequeue())
+	for _, v := range seq {
+		got, err := q.Dequeue()
+		if err != nil {
+			t.Error(err)
+		}
+		if got != v {
+			t.Errorf("got %v, want %v", got, v)
+		}
+	}
 }
