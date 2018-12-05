@@ -14,9 +14,8 @@ func TestGet(t *testing.T) {
 	}
 	for i, tt := range tests {
 		a := New(cap(tt.values))
-		for k, v := range tt.values {
-			a.elements[k] = v
-			a.len++
+		for _, v := range tt.values {
+			a.Append(v)
 		}
 
 		for k, v := range tt.values {
@@ -28,6 +27,36 @@ func TestGet(t *testing.T) {
 			if got != v {
 				t.Errorf("%v. got %v, want %v", i, got, v)
 			}
+		}
+	}
+}
+
+func TestSet(t *testing.T) {
+	tests := []struct {
+		values   []interface{}
+		index    int
+		setValue interface{}
+	}{
+		{[]interface{}{0}, 0, 1},
+		{[]interface{}{0, 1, 2, 3}, 3, 4},
+	}
+	for i, tt := range tests {
+		a := New(cap(tt.values))
+		for _, v := range tt.values {
+			a.Append(v)
+		}
+
+		if err := a.Set(tt.index, tt.setValue); err != nil {
+			t.Error(err)
+		}
+
+		got, err := a.Get(tt.index)
+		if err != nil {
+			t.Error(err)
+		}
+
+		if got != tt.setValue {
+			t.Errorf("%v. got %v, want %v", i, got, tt.setValue)
 		}
 	}
 }
@@ -49,8 +78,7 @@ func TestAppend(t *testing.T) {
 		}
 
 		if !utils.IsSameSlice(a.elements, tt.values) {
-			t.Errorf("%v. got %v, want %v",
-				i, a.elements, tt.values)
+			t.Errorf("%v. got %v, want %v", i, a.elements, tt.values)
 		}
 	}
 }
@@ -69,9 +97,8 @@ func TestInsert(t *testing.T) {
 	}
 	for i, tt := range tests {
 		a := New(tt.cap)
-		for k, v := range tt.give {
-			a.elements[k] = v
-			a.len++
+		for _, v := range tt.give {
+			a.Append(v)
 		}
 
 		err := a.Insert(tt.i, tt.v)

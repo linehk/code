@@ -29,6 +29,16 @@ func (a array) Get(i int) (interface{}, error) {
 	return a.elements[i], nil
 }
 
+// Set assign v to array index i.
+func (a *array) Set(i int, v interface{}) error {
+	if i < 0 || i > a.len-1 {
+		return errors.New("illegal index")
+	}
+
+	a.elements[i] = v
+	return nil
+}
+
 // Len returns array available element counts.
 func (a array) Len() int {
 	return a.len
