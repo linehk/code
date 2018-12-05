@@ -101,8 +101,7 @@ func TestInsert(t *testing.T) {
 			a.Append(v)
 		}
 
-		err := a.Insert(tt.i, tt.v)
-		if err != nil {
+		if err := a.Insert(tt.i, tt.v); err != nil {
 			t.Error(err)
 		}
 
@@ -133,8 +132,7 @@ func TestDelete(t *testing.T) {
 			}
 		}
 
-		err := a.Delete(tt.i)
-		if err != nil {
+		if err := a.Delete(tt.i); err != nil {
 			t.Error(err)
 		}
 
