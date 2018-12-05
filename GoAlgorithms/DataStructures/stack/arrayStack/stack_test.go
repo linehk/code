@@ -2,23 +2,36 @@ package arrayStack
 
 import (
 	"testing"
+
+	"GoAlgorithms/utils"
 )
 
 func TestStack(t *testing.T) {
-	s := New(3)
-	s.Push(1)
-	s.Push(2)
-	s.Push(3)
-	t.Log(s.elements)
+	tests := []struct {
+		seq  []interface{}
+		want []interface{}
+	}{
+		{[]interface{}{0, 1, 2, 3}, []interface{}{3, 2, 1, 0}},
+	}
+	for i, tt := range tests {
+		s := New(len(tt.seq))
+		for _, v := range tt.seq {
+			if err := s.Push(v); err != nil {
+				t.Error(err)
+			}
+		}
 
-	s.Push(4)
-	t.Log(s.elements)
+		got := make([]interface{}, 0)
+		for range tt.seq {
+			v, err := s.Pop()
+			if err != nil {
+				t.Error(err)
+			}
+			got = append(got, v)
+		}
 
-	t.Log(s.Pop())
-	t.Log(s.Pop())
-	t.Log(s.Pop())
-	t.Log(s.elements)
-
-	t.Log(s.Pop())
-	t.Log(s.elements)
+		if !utils.IsSameSlice(got, tt.want) {
+			t.Errorf("%v. got %v, want %v", i, got, tt.want)
+		}
+	}
 }

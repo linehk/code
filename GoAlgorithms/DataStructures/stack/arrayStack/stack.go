@@ -1,11 +1,20 @@
 package arrayStack
 
+import (
+	"errors"
+)
+
 type stack struct {
 	cap      int
 	top      int
 	elements []interface{}
 }
 
+func (s stack) Cap() int {
+	return s.cap
+}
+
+// New creates a stack by cap.
 func New(cap int) *stack {
 	s := new(stack)
 	s.cap = cap
@@ -14,22 +23,25 @@ func New(cap int) *stack {
 	return s
 }
 
-func (s *stack) Push(v interface{}) {
+// Push inserts v in the stack.
+func (s *stack) Push(v interface{}) error {
 	if s.top+1 >= s.cap {
-		return
+		return errors.New("stack is full")
 	}
 
 	s.top++
 	s.elements[s.top] = v
+	return nil
 }
 
-func (s *stack) Pop() interface{} {
+// Pop deletes the element from the stack and return it.
+func (s *stack) Pop() (interface{}, error) {
 	if s.top < 0 {
-		return nil
+		return nil, errors.New("stack is empty")
 	}
 
 	v := s.elements[s.top]
 	s.elements[s.top] = nil
 	s.top--
-	return v
+	return v, nil
 }
