@@ -50,6 +50,7 @@ func (a *array) Append(v interface{}) {
 }
 
 // Insert inserts v before i.
+// Can't inserts to a empty array.
 func (a *array) Insert(i int, v interface{}) error {
 	if i < 0 || i > a.len-1 {
 		return errors.New("illegal index")
