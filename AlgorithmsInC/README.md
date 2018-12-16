@@ -1,3 +1,3 @@
-# 数据结构与算法分析 - C 语言描述
+# 算法：C 语言实现
 
-https://book.douban.com/subject/1139426/
+https://book.douban.com/subject/4065258/
