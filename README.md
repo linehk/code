@@ -16,10 +16,6 @@
 
 [GoByExample](GoByExample/README.md)
 
-[Go 语言实战](GoInAction/README.md)
-
-[Go 并发编程实战](GoProgrammingAndConcurrencyInPractice/README.md)
-
 [Go Web 编程](GoWebProgramming/README.md)
 
 [算法图解](GrokkingAlgorithms/README.md)
