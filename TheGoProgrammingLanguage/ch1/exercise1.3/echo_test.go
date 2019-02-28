@@ -12,7 +12,7 @@ func BenchmarkEcho1(b *testing.B) {
 	b.N = n
 	now := time.Now()
 	for i := 0; i < b.N; i++ {
-		Echo1()
+		echo1()
 	}
 	b.Log(time.Since(now))
 }
@@ -22,7 +22,7 @@ func BenchmarkEcho2(b *testing.B) {
 	b.N = n
 	now := time.Now()
 	for i := 0; i < b.N; i++ {
-		Echo2()
+		echo2()
 	}
 	b.Log(time.Since(now))
 }
@@ -32,7 +32,7 @@ func BenchmarkEcho3(b *testing.B) {
 	b.N = n
 	now := time.Now()
 	for i := 0; i < b.N; i++ {
-		Echo3()
+		echo3()
 	}
 	b.Log(time.Since(now))
 }
