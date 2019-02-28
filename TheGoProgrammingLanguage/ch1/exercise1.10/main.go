@@ -11,34 +11,39 @@ import (
 )
 
 type result struct {
-	data    []byte
-	elapsed time.Duration
-	err     error
+	data []byte
+	secs float64
+	err  error
 }
 
 func main() {
 	ch1 := make(chan result)
 	ch2 := make(chan result)
 	for _, url := range os.Args[1:] {
-		go fetch(url, ch1)
-		go fetch(url, ch2)
+		go timesFetch(url, ch1, ch2)
 	}
 	for _, url := range os.Args[1:] {
 		fmt.Println(url)
-		firstResp := <-ch1
-		secondResp := <-ch2
+
+		res1 := <-ch1
+		res2 := <-ch2
 
 		fmt.Println("first response:")
-		fmt.Printf("%s\n", firstResp.data)
-		fmt.Println(firstResp.err)
+		fmt.Printf("%s\n", res1.data)
+		fmt.Println(res1.err)
 
 		fmt.Println("second response:")
-		fmt.Printf("%s\n", secondResp.data)
-		fmt.Println(secondResp.err)
+		fmt.Printf("%s\n", res2.data)
+		fmt.Println(res2.err)
 
-		fmt.Printf("first elapsed: %s, second elapsed: %s\n",
-			firstResp.elapsed, secondResp.elapsed)
+		fmt.Printf("first resp secs: %.2fs; second resp secs: %.2fs\n",
+			res1.secs, res2.secs)
 	}
+}
+
+func timesFetch(url string, ch1, ch2 chan<- result) {
+	fetch(url, ch1)
+	fetch(url, ch2)
 }
 
 func fetch(url string, ch chan<- result) {
@@ -55,7 +60,6 @@ func fetch(url string, ch chan<- result) {
 		ch <- result{err: err}
 		return
 	}
-	elapsed := time.Since(start)
-	ch <- result{data: data, elapsed: elapsed, err: nil}
-	close(ch)
+	secs := time.Since(start).Seconds()
+	ch <- result{data: data, secs: secs, err: nil}
 }
