@@ -12,14 +12,13 @@ import (
 	"time"
 )
 
-var palette = []color.Color{color.White, color.Black, color.RGBA{0, 255, 0, 0xff}}
+var palette = []color.Color{color.White, color.RGBA{0, 255, 0, 0xff}}
 
 // var palette = []color.Color{color.White, color.Black, color.RGBA{0, 255, 0, math.MaxUint8}}
 
 const (
 	whiteIndex = 0 // first color in palette
-	blackIndex = 1 // next color in palette
-	greenIndex = 2
+	greenIndex = 1
 )
 
 func main() {
@@ -33,7 +32,7 @@ func main() {
 func lissajous(out io.Writer) {
 	const (
 		cycles  = 5     // number of complete x oscillator revolutions
-		res     = 0.001 // augular resolution
+		res     = 0.001 // angular resolution
 		size    = 100   // image canvas covers [-size..+size]
 		nframes = 64    // number of animation frames
 		delay   = 8     // delay between frames in 10ms units
