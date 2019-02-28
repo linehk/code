@@ -24,8 +24,7 @@ func main() {
 	}
 	for line, n := range counts {
 		if n > 1 {
-			fmt.Printf("%d\t%s\n", n, line)
-			fmt.Printf("%s\n", os.Args[1:])
+			fmt.Printf("%s: %d: %s\n", os.Args[0], n, line)
 		}
 	}
 }
