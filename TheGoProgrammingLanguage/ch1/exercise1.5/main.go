@@ -14,8 +14,6 @@ import (
 
 var palette = []color.Color{color.White, color.RGBA{0, 255, 0, 0xff}}
 
-// var palette = []color.Color{color.White, color.Black, color.RGBA{0, 255, 0, math.MaxUint8}}
-
 const (
 	whiteIndex = 0 // first color in palette
 	greenIndex = 1
