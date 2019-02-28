@@ -8,7 +8,6 @@ import (
 	"io"
 	"math"
 	"math/rand"
-	"os"
 	"time"
 )
 
@@ -31,27 +30,20 @@ func main() {
 	// Thanks to Randall McPherson for pointing out the omission.
 	rand.Seed(time.Now().UTC().UnixNano())
 
-	if len(os.Args) > 1 && os.Args[1] == "web" {
-		handler := func(w http.ResponseWriter, r *http.Request) {
-			lissajous(w)
-		}
-		http.HandleFunc("/", handler)
-		/*
-			http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-				lissajous(w)
-			})
-		*/
-		log.Fatal(http.ListenAndServe("localhost:8000", nil))
-		return
+	handler := func(w http.ResponseWriter, r *http.Request) {
+		lissajous(w)
 	}
-
-	lissajous(os.Stdout)
+	http.HandleFunc("/", handler)
+	//http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+	//	lissajous(w)
+	//})
+	log.Fatal(http.ListenAndServe("localhost:8000", nil))
 }
 
 func lissajous(out io.Writer) {
 	const (
 		cycles  = 5     // number of complete x oscillator revolutions
-		res     = 0.001 // augular resolution
+		res     = 0.001 // angular resolution
 		size    = 100   // image canvas covers [-size..+size]
 		nframes = 64    // number of animation frames
 		delay   = 8     // delay between frames in 10ms units
