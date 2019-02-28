@@ -7,7 +7,7 @@ import (
 
 func main() {
 	var s, sep string
-	for _, arg := range os.Args[:] {
+	for _, arg := range os.Args {
 		s += sep + arg
 		sep = " "
 	}
