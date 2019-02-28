@@ -1,9 +1,7 @@
-package popcount_test
+package popcount
 
 import (
 	"testing"
-
-	"gopl/ch2/popcount"
 )
 
 func BitCount(x uint64) int {
@@ -38,7 +36,7 @@ func PopCountByShifting(x uint64) int {
 
 func BenchmarkPopCount(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		popcount.PopCount(0x1234567890ABCDEF)
+		PopCount(0x1234567890ABCDEF)
 	}
 }
 
@@ -60,14 +58,15 @@ func BenchmarkPopCountByShifting(b *testing.B) {
 	}
 }
 
-/* go test -cpu=8 -bench=.
-goos: linux
+/*
+go test -cpu=8 -bench=.
+goos: darwin
 goarch: amd64
-pkg: gopl/ch2/popcount
-BenchmarkPopCount-8                     2000000000               0.32 ns/op
-BenchmarkBitCount-8                     2000000000               0.31 ns/op
-BenchmarkPopCountByClearing-8           50000000                29.7 ns/op
-BenchmarkPopCountByShifting-8           10000000               154 ns/op
+pkg: github.com/linehk/BookCode/TheGoProgrammingLanguage/ch2/popcount
+BenchmarkPopCount-8             	2000000000	         0.61 ns/op
+BenchmarkBitCount-8             	2000000000	         0.31 ns/op
+BenchmarkPopCountByClearing-8   	100000000	        16.0 ns/op
+BenchmarkPopCountByShifting-8   	30000000	        48.1 ns/op
 PASS
-ok      gopl/ch2/popcount  4.580s
+ok  	github.com/linehk/BookCode/TheGoProgrammingLanguage/ch2/popcount	5.051s
 */

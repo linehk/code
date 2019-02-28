@@ -4,20 +4,11 @@ package popcount
 var pc [256]byte
 
 func init() {
-	// for i, _ := range pc
 	for i := range pc {
 		pc[i] = pc[i/2] + byte(i&1)
 	}
 }
 
-/*
-var pc [256]byte = func() (pc [256]byte) {
-	for i := range pc {
-		pc[i] = pc[i/2] + byte(i&1)
-	}
-	return
-}()
-*/
 // PopCount returns the population count (number of set bits) of x.
 func PopCount(x uint64) int {
 	return int(pc[byte(x>>(0*8))] +
