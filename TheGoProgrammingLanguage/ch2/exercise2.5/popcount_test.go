@@ -4,26 +4,18 @@ import (
 	"testing"
 )
 
-func PopCountByClearing(x uint64) int {
-	n := 0
-	for x != 0 {
-		x = x & (x - 1) // clear rightmost non-zero bit
-		n++
-	}
-	return n
-}
+var x uint64 = 0x1234567890ABCDEF
 
-func BenchmarkPopCountByClearing(b *testing.B) {
+// BenchmarkPopCount-8 2000000000 0.32 ns/op
+func BenchmarkPopCount(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		PopCountByClearing(0x1234567890ABCDEF)
+		PopCount(x)
 	}
 }
 
-/*
-goos: linux
-goarch: amd64
-pkg: gopl/ch2/exercise2.5
-BenchmarkPopCountByClearing-8           50000000                30.3 ns/op
-PASS
-ok      gopl/ch2/exercise2.5       1.552s
-*/
+// BenchmarkPopCountClean-8 100000000 16.9 ns/op
+func BenchmarkPopCountClean(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		PopCountClean(x)
+	}
+}
