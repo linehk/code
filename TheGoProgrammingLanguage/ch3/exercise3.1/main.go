@@ -61,7 +61,7 @@ func f(x, y float64) float64 {
 
 func isFinite(f float64) bool {
 	if math.IsInf(f, 0) || math.IsNaN(f) {
-		return false
+		return true
 	}
-	return true
+	return false
 }
