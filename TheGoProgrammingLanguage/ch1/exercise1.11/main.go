@@ -1,3 +1,4 @@
+// 越长的参数运行得越久，网站没回应的话会跳过。
 package main
 
 import (
