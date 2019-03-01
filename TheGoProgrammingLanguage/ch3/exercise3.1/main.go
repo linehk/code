@@ -4,7 +4,6 @@ package main
 import (
 	"fmt"
 	"math"
-	"os"
 )
 
 const (
@@ -28,6 +27,12 @@ func main() {
 			bx, by := corner(i, j)
 			cx, cy := corner(i, j+1)
 			dx, dy := corner(i+1, j+1)
+			if isFinite(ax) || isFinite(ay) ||
+				isFinite(bx) || isFinite(by) ||
+				isFinite(cx) || isFinite(cy) ||
+				isFinite(dx) || isFinite(dy) {
+				continue
+			}
 			fmt.Printf("<polygon points='%g,%g %g,%g %g,%g %g,%g'/>\n",
 				ax, ay, bx, by, cx, cy, dx, dy)
 		}
@@ -41,10 +46,7 @@ func corner(i, j int) (float64, float64) {
 	y := xyrange * (float64(j)/cells - 0.5)
 
 	// Compute surface height z.
-	z, ok := f(x, y)
-	if ok == false {
-		os.Exit(1)
-	}
+	z := f(x, y)
 
 	// Project (x,y,z) isometrically onto 2-D SVG canvas (sx,xy).
 	sx := width/2 + (x-y)*cos30*xyscale
@@ -52,11 +54,14 @@ func corner(i, j int) (float64, float64) {
 	return sx, sy
 }
 
-func f(x, y float64) (value float64, ok bool) {
+func f(x, y float64) float64 {
 	r := math.Hypot(x, y) // distance from (0,0)
-	rt := math.Sin(r) / r
-	if !(x > math.MaxFloat64 || x < math.SmallestNonzeroFloat64) {
-		return 0, false
+	return math.Sin(r) / r
+}
+
+func isFinite(f float64) bool {
+	if math.IsInf(f, 0) || math.IsNaN(f) {
+		return false
 	}
-	return rt, true
+	return true
 }
