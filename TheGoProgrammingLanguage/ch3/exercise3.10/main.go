@@ -6,18 +6,17 @@ import (
 )
 
 func main() {
-	fmt.Println(comma("12345"))
+	fmt.Println(comma("1234567"))
 }
 
 func comma(s string) string {
-	var buf bytes.Buffer
-	l := len(s)
-	if l <= 3 {
-		return s
+	if s == "" {
+		return ""
 	}
+	var buf bytes.Buffer
 	buf.WriteByte(s[0])
-	for i := 1; i < l; i++ {
-		if (l-i)%3 == 0 {
+	for i := 1; i < len(s); i++ {
+		if (len(s)-i)%3 == 0 {
 			buf.WriteByte(',')
 		}
 		buf.WriteByte(s[i])
