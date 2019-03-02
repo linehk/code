@@ -5,39 +5,27 @@ import (
 	"fmt"
 )
 
-var s1 string
-var s2 string
-
 func main() {
 	c1 := sha256.Sum256([]byte("x"))
-	for _, c := range c1 {
-		s1 += fmt.Sprintf("%b", c)
-	}
-
 	c2 := sha256.Sum256([]byte("X"))
-	for _, c := range c2 {
-		s2 += fmt.Sprintf("%b", c)
-	}
-
-	fmt.Println(diffString(s1, s2))
+	fmt.Println(sha256DiffBitCount(c1, c2))
 }
 
-func diffString(s1, s2 string) int {
-	var count int
-	var l int
-	var d int
-	if len(s1) > len(s2) {
-		l = len(s2)
-		d = len(s1) - len(s2)
-	} else {
-		l = len(s1)
-		d = len(s2) - len(s1)
+func sha256DiffBitCount(c1, c2 [32]byte) int {
+	count := 0
+	for i := 0; i < 32; i++ {
+		count += diffBitCount(c1[i], c2[i])
 	}
+	return count
+}
 
-	for i := 0; i < l; i++ {
-		if s1[i] != s2[i] {
+func diffBitCount(b1, b2 byte) int {
+	count := 0
+	for i := uint(0); i < 8; i++ {
+		mask := byte(1 << i)
+		if b1&mask != b2&mask {
 			count++
 		}
 	}
-	return count + d
+	return count
 }
