@@ -2,28 +2,28 @@ package main
 
 import (
 	"fmt"
-	"sort"
-	"strings"
 )
 
 func main() {
-	fmt.Println(isCrash("abcd", "bcad"))
+	fmt.Println(isAnagram("abcd", "dcba"))
 }
 
-func isCrash(s1, s2 string) bool {
-	var buf1 []string
-	var buf2 []string
-	for _, v := range s1 {
-		buf1 = append(buf1, string(v))
+func isAnagram(s1, s2 string) bool {
+	if len(s1) != len(s2) {
+		return false
 	}
-	for _, v := range s2 {
-		buf2 = append(buf2, string(v))
-	}
-	sort.Strings(buf1)
-	sort.Strings(buf2)
 
-	if strings.Join(buf1, "") == strings.Join(buf2, "") {
-		return true
+	m := make(map[rune]int, len(s1))
+
+	for _, v := range s1 {
+		m[v]++
 	}
-	return false
+
+	for _, v := range s2 {
+		if m[v] == 0 {
+			return false
+		}
+		m[v]--
+	}
+	return true
 }
