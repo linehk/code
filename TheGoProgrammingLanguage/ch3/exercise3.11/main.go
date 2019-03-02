@@ -6,41 +6,35 @@ import (
 )
 
 func main() {
-	fmt.Println(comma("-12345"))
+	fmt.Println(comma("-1234567890.0987654321"))
 }
 
 func comma(s string) string {
-	var buf bytes.Buffer
-	var last string
-	if s[0] == '+' {
-		buf.WriteByte('+')
-		s = s[1:]
-	} else if s[0] == '-' {
-		buf.WriteByte('-')
-		s = s[1:]
+	if s == "" {
+		return ""
 	}
-	for i := 0; i < len(s); i++ {
-		if s[i] == '.' {
-			last = s[i:]
-			s = s[:i]
+	str := []byte(s)
+	var buf bytes.Buffer
+	sign := str[0]
+	if sign == '+' || sign == '-' {
+		buf.WriteByte(sign)
+		str = str[1:]
+	}
+
+	last := make([]byte, 0)
+	for i := 0; i < len(str); i++ {
+		if str[i] == '.' {
+			last = str[i:]
+			str = str[:i]
 		}
 	}
 
-	l := len(s)
-
-	if l <= 3 {
-		buf.WriteString(s)
-		buf.WriteString(last)
-		return buf.String()
-	}
-
-	buf.WriteByte(s[0])
-	for i := 1; i < l; i++ {
-		if (l-i)%3 == 0 {
+	for i := 0; i < len(str); i++ {
+		if (len(str)-i)%3 == 0 {
 			buf.WriteByte(',')
 		}
-		buf.WriteByte(s[i])
+		buf.WriteByte(str[i])
 	}
-	buf.WriteString(last)
+	buf.WriteString(string(last))
 	return buf.String()
 }
