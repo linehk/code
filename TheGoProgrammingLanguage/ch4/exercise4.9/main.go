@@ -7,13 +7,13 @@ import (
 )
 
 func main() {
-	words := make(map[string]int)
+	wordCount := make(map[string]int)
 	input := bufio.NewScanner(os.Stdin)
 	input.Split(bufio.ScanWords)
 	for input.Scan() {
-		words[input.Text()]++
+		wordCount[input.Text()]++
 	}
-	for k, v := range words {
-		fmt.Printf("%s\t%d\n", k, v)
+	for word, count := range wordCount {
+		fmt.Printf("word: %s, count= %d\n", word, count)
 	}
 }
