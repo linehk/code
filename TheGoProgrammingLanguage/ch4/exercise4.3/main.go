@@ -5,21 +5,13 @@ import (
 )
 
 func main() {
-	a := [6]int{0, 1, 2, 3, 4, 5}
-	reversePoint1(&a)
-	fmt.Println(a)
-	reversePoint2(&a)
+	a := [10]int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
+	reverse(&a)
 	fmt.Println(a)
 }
 
-func reversePoint1(s *[6]int) {
-	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
-		s[i], s[j] = s[j], s[i]
-	}
-}
-
-func reversePoint2(p *[6]int) {
-	for i, j := 0, len(*p)-1; i < j; i, j = i+1, j-1 {
-		(*p)[i], (*p)[j] = (*p)[j], (*p)[i]
+func reverse(a *[10]int) {
+	for i, j := 0, len(a)-1; i < j; i, j = i+1, j-1 {
+		a[i], a[j] = a[j], a[i]
 	}
 }
