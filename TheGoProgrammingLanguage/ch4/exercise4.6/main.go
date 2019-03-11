@@ -7,7 +7,9 @@ import (
 )
 
 func main() {
-	fmt.Printf("%s\n", replace([]byte("哈哈  哈 哈哈  a")))
+	b := []byte("哈哈  哈 哈哈  a")
+	b = replace(b)
+	fmt.Printf("%s\n", b)
 }
 
 func replace(b []byte) []byte {
