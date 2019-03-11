@@ -3,19 +3,24 @@ package main
 import (
 	"fmt"
 	"unicode"
+	"unicode/utf8"
 )
 
 func main() {
-	fmt.Printf("%s\n", replace([]byte("a   a")))
+	fmt.Printf("%s\n", replace([]byte("哈哈  哈 哈哈  a")))
 }
 
-func replace(slice []byte) []byte {
-	for i := 0; i < len(slice)-1; i++ {
-		if unicode.IsSpace(rune(slice[i])) && slice[i] == slice[i+1] {
-			copy(slice[i:], slice[i+1:])
-			slice = slice[:len(slice)-1]
-			i--
+func replace(b []byte) []byte {
+	for i := 0; i < len(b); {
+		first, size := utf8.DecodeRune(b[i:])
+		if unicode.IsSpace(first) {
+			second, _ := utf8.DecodeRune(b[i+size:])
+			if unicode.IsSpace(second) {
+				copy(b[i:], b[i+size:])
+				b = b[:len(b)-size]
+			}
 		}
+		i += size
 	}
-	return slice
+	return b
 }
