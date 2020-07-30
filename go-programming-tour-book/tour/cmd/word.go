@@ -26,10 +26,13 @@ var desc = strings.Join([]string{
 	"5：驼峰单词转为下画线单词",
 }, "\n")
 
-var wordCmd = &cobra.Command {
-	Use: "word",
+var str string
+var mode int8
+
+var wordCmd = &cobra.Command{
+	Use:   "word",
 	Short: "单词格式转换",
-	Long: desc,
+	Long:  desc,
 	Run: func(cmd *cobra.Command, args []string) {
 		var content string
 		switch mode {
@@ -50,9 +53,6 @@ var wordCmd = &cobra.Command {
 		log.Printf("输出结果：%s", content)
 	},
 }
-
-var str string
-var mode int8
 
 func init() {
 	wordCmd.Flags().StringVarP(&str, "str", "s", "", "请输入单词内容")

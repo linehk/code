@@ -20,19 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db9860ad-603c-4166-8e5c-e3af48a78f83" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/tour.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cmd/word.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/example1/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/example2/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example/example3/main.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/internal/word/word.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cmd/time.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/example/example4/main.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/internal/timer/time.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/tour.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/root.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/root.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/word.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/word.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/example1/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/example/example1/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/internal/word/word.go" beforeDir="false" afterPath="$PROJECT_DIR$/internal/word/word.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,18 +65,19 @@
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="ask.go.tool.to.install.GoImportsTaskConsumer" value="true" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\line\Desktop\work\project\bookcode\go-programming-tour-book\tour\example\example1" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Go Build.go build github.com/linehk/bookcode/go-programming-tour-book/tour/example/example4">
     <configuration name="go build github.com/linehk/bookcode/go-programming-tour-book/tour/example/example1" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="tour" />
       <working_directory value="$PROJECT_DIR$" />
@@ -86,8 +86,18 @@
       <package value="github.com/linehk/bookcode/go-programming-tour-book/tour/example/example1" />
       <method v="2" />
     </configuration>
+    <configuration name="go build github.com/linehk/bookcode/go-programming-tour-book/tour/example/example4" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="tour" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="PACKAGE" />
+      <filePath value="$PROJECT_DIR$/example/example4/main.go" />
+      <package value="github.com/linehk/bookcode/go-programming-tour-book/tour/example/example4" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build github.com/linehk/bookcode/go-programming-tour-book/tour/example/example4" />
         <item itemvalue="Go Build.go build github.com/linehk/bookcode/go-programming-tour-book/tour/example/example1" />
       </list>
     </recent_temporary>
@@ -117,6 +127,10 @@
       <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state x="596" y="255" key="#Go_Modules/0.0.1707.920@0.0.1707.920" timestamp="1596031442305" />
+    <state x="450" y="188" key="EditFileWatcherDialog" timestamp="1596116770425">
+      <screen x="0" y="0" width="1707" height="920" />
+    </state>
+    <state x="450" y="188" key="EditFileWatcherDialog/0.0.1707.920@0.0.1707.920" timestamp="1596116770425" />
     <state x="728" y="290" width="554" height="341" key="EnvironmentVariablesDialog" timestamp="1596031441712">
       <screen x="0" y="0" width="1707" height="920" />
     </state>
@@ -137,9 +151,9 @@
       <screen x="0" y="0" width="1707" height="920" />
     </state>
     <state width="1680" height="228" key="GridCell.Tab.0.right/0.0.1707.920@0.0.1707.920" timestamp="1596032571372" />
-    <state x="238" y="19" key="SettingsEditor" timestamp="1596034208305">
+    <state x="238" y="19" key="SettingsEditor" timestamp="1596116773813">
       <screen x="0" y="0" width="1707" height="920" />
     </state>
-    <state x="238" y="19" key="SettingsEditor/0.0.1707.920@0.0.1707.920" timestamp="1596034208305" />
+    <state x="238" y="19" key="SettingsEditor/0.0.1707.920@0.0.1707.920" timestamp="1596116773813" />
   </component>
 </project>
